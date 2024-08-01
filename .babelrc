@@ -1,0 +1,15 @@
+{
+  "plugins": [
+    "react-hot-loader/babel",
+    "@emotion/babel-plugin",
+    ["@babel/plugin-proposal-decorators", { "version": "2023-11" }]
+  ],
+  "presets": [
+    "@babel/preset-typescript",
+    [
+      "@babel/preset-react",
+      { "runtime": "automatic", "importSource": "@emotion/react" }
+    ],
+    ["@babel/preset-env", { "targets": "defaults" }]
+  ]
+}

@@ -1,0 +1,28 @@
+name: PR
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+    branches:
+      - main
+
+jobs:
+  check:
+    name: Title
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Checking title prefix
+        run: |
+          PR_TITLE="${{ github.event.pull_request.title }}"
+          REGEX="^(feat|fix|refactor|test): "
+          if [[ $PR_TITLE =~ $REGEX ]]; then
+            echo "Title is correct"
+            exit 0
+          else
+            echo "Error: Invalid PR title format. Info: https://github.com/reframework/pixli-ux#pr-title-rules"
+            exit 1
+          fi
