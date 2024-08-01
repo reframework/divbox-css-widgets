@@ -27,7 +27,8 @@
     "outDir": ".dist",
     "paths": {
       "@src/*": ["src/*"]
-    }
+    },
+    "types": ["@emotion/core"]
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules"]
