@@ -8,6 +8,6 @@ import { css } from '@emotion/react'
 export const colors = css`
   :root {
     --color-gray-1: #ffffff;
-
+    --color-gray-2: #f5f5f5;
   }
 `
