@@ -1,9 +1,9 @@
 import { ILength } from '@src/models/css/length'
-import { Variable } from '@src/models/css/spacing'
+import { IVariable } from '@src/models/css/spacing'
 
 export interface IGap {
-  row: ILength | Variable | null
-  col: ILength | Variable | null
+  row: ILength | IVariable | null
+  col: ILength | IVariable | null
 }
 
 export const GapModel = (props?: Partial<IGap>): IGap => {

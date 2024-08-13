@@ -10,11 +10,11 @@ const root = createRoot(container!)
 const MockProvider = () => {
   const [state, setState] = useState<Css.ICss>(Css.Model.Css())
 
-  const isVar = (value: any): value is Css.Variable => {
+  const isVar = (value: any): value is Css.IVariable => {
     return value.startsWith('var(--')
   }
 
-  const getVarRawValue = (value: Css.Variable): string | null => {
+  const getVarRawValue = (value: Css.IVariable): string | null => {
     return '100px'
   }
 

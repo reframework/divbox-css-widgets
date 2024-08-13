@@ -1,21 +1,21 @@
 import { LengthUnit } from '@src/models/css/enums'
 import { ILength } from '@src/models/css/length'
 
-export type Variable = string
+export type IVariable = string
 
 export type IMargin = {
   /** The margin on the top side. Default is null. */
-  t: ILength | Variable | LengthUnit.AUTO | null
-  r: ILength | Variable | LengthUnit.AUTO | null
-  b: ILength | Variable | LengthUnit.AUTO | null
-  l: ILength | Variable | LengthUnit.AUTO | null
+  t: ILength | IVariable | LengthUnit.AUTO | null
+  r: ILength | IVariable | LengthUnit.AUTO | null
+  b: ILength | IVariable | LengthUnit.AUTO | null
+  l: ILength | IVariable | LengthUnit.AUTO | null
 }
 
 export type IPadding = {
-  t: ILength | Variable | null
-  r: ILength | Variable | null
-  b: ILength | Variable | null
-  l: ILength | Variable | null
+  t: ILength | IVariable | null
+  r: ILength | IVariable | null
+  b: ILength | IVariable | null
+  l: ILength | IVariable | null
 }
 
 export const MarginModel = (props?: Partial<IMargin>): IMargin => {
