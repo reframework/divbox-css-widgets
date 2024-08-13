@@ -3,57 +3,58 @@ import { HiMiniBarsArrowDown } from 'react-icons/hi2'
 import { Box } from '@chakra-ui/react'
 import { toMakeUpperFirstChar } from '@src/helpers'
 import { DISPLAY_TYPES } from '@src/constants/common'
+import { Css } from '@src/models/css'
 
 export const FLEX_DIRECTION_MAIN_OPTIONS = [
   {
-    value: 'horizontal',
+    value: Css.Enum.FlexDirection.ROW,
     label: <IoIosArrowRoundForward fontSize={'18px'} />,
   },
   {
-    value: 'vertical',
+    value: Css.Enum.FlexDirection.COLUMN,
     label: <IoIosArrowRoundDown fontSize={'18px'} />,
   },
 ]
 
 export const FLEX_DISPLAY_MAIN_OPTIONS = [
   {
-    value: DISPLAY_TYPES.block,
+    value: Css.Enum.Display.BLOCK,
     label: toMakeUpperFirstChar(DISPLAY_TYPES.block),
   },
   {
-    value: DISPLAY_TYPES.flex,
+    value: Css.Enum.Display.FLEX,
     label: toMakeUpperFirstChar(DISPLAY_TYPES.flex),
   },
   {
-    value: DISPLAY_TYPES.grid,
+    value: Css.Enum.Display.GRID,
     label: toMakeUpperFirstChar(DISPLAY_TYPES.grid),
   },
 ]
 
 export const FLEX_DISPLAY_ADD_OPTIONS = [
   {
-    key: DISPLAY_TYPES.inlineBlock,
+    key: Css.Enum.Display.INLINE_BLOCK,
     label: toMakeUpperFirstChar(DISPLAY_TYPES.inlineBlock),
     label_prop: 'Inl-blk',
   },
   {
-    key: DISPLAY_TYPES.inlineFlex,
+    key: Css.Enum.Display.INLINE_FLEX,
     label: toMakeUpperFirstChar(DISPLAY_TYPES.inlineFlex),
     label_prop: 'Inl-flx',
   },
   {
-    key: DISPLAY_TYPES.inlineGrid,
+    key: Css.Enum.Display.INLINE_GRID,
     label: toMakeUpperFirstChar(DISPLAY_TYPES.inlineGrid),
     label_prop: 'Inl-grd',
   },
   {
-    key: DISPLAY_TYPES.inline,
+    key: Css.Enum.Display.INLINE,
     label: toMakeUpperFirstChar(DISPLAY_TYPES.inline),
     label_prop: 'Inln',
   },
   { type: 'divider' },
   {
-    key: DISPLAY_TYPES.none,
+    key: Css.Enum.Display.NONE,
     label: toMakeUpperFirstChar(DISPLAY_TYPES.none),
     label_prop: 'None',
   },

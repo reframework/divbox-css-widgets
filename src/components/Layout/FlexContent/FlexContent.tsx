@@ -5,13 +5,18 @@ import {
 } from '@src/constants/flex'
 import { ContentWrapper } from '@src/components/ContentWrapper/ContentWrapper'
 import { Slider } from '@src/components/Slider/Slider'
+import { Css } from '@src/models/css'
 
-export const FlexContent = () => {
+interface IFlexContentProps {
+  model: Css.IFlex
+}
+
+export const FlexContent = ({ model }: IFlexContentProps) => {
   return (
     <>
       <ContentWrapper title={'Direction'}>
         <Segmented
-          defaultValue={FLEX_DIRECTION_MAIN_OPTIONS[0].value}
+          defaultValue={model.direction}
           mainDefaultOptions={FLEX_DIRECTION_MAIN_OPTIONS}
           additionalOptions={FLEX_DIRECTION_ADD_OPTIONS}
           additionalOptionLabelProp={'icon'}
