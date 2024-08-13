@@ -1,5 +1,4 @@
 import { Box, Grid } from '@chakra-ui/react'
-import styled from '@emotion/styled'
 import { css } from '@emotion/react'
 
 //background: linear-gradient(to bottom right, var(--chakra-colors-gray-100) 50%, var(--chakra-colors-gray-200) 50%);
