@@ -5,8 +5,10 @@ import { Global } from '@emotion/react'
 import { colors } from '@src/components/theme/colors'
 import { ChakraProvider } from '@chakra-ui/react'
 import { Widget } from '@src/components/Widget'
+import { ctx } from '@src/components/Context'
+import { ICssWidgetProps } from '@src/types/props'
 
-export const App = () => {
+export const App = (props: ICssWidgetProps) => {
   return (
     <ChakraProvider>
       <ConfigProvider
@@ -64,7 +66,9 @@ export const App = () => {
       >
         <AntApp>
           <ErrorBoundary fallbackRender={() => 'Whoops'}>
-            <Widget />
+            <ctx.Provider value={props}>
+              <Widget />
+            </ctx.Provider>
           </ErrorBoundary>
         </AntApp>
         <GlobalStyles />

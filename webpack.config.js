@@ -3,10 +3,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { resolveTsAliases } = require('./bin/resolveTsAliases')
 const CircularDependencyPlugin = require('circular-dependency-plugin')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 
 const { ANALYZE = false, PORT = 3000 } = process.env
 
 module.exports = {
+  mode: 'development',
   entry: {
     app: path.resolve(__dirname, 'src', 'index.tsx'),
   },
@@ -15,7 +17,6 @@ module.exports = {
     filename: '[name].[contenthash].bundle.js',
     publicPath: '/',
   },
-  mode: 'development',
   resolve: {
     alias: resolveTsAliases(),
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
@@ -35,6 +36,9 @@ module.exports = {
         use: [
           {
             loader: 'babel-loader',
+            options: {
+              plugins: [require.resolve('react-refresh/babel')],
+            },
           },
         ],
       },
@@ -64,9 +68,11 @@ module.exports = {
       allowAsyncCycles: false,
       cwd: process.cwd(),
     }),
+    new ReactRefreshWebpackPlugin(),
     ...(ANALYZE ? [new BundleAnalyzerPlugin()] : []),
   ],
   devServer: {
+    open: true,
     hot: true,
     port: PORT,
     static: {
@@ -79,8 +85,9 @@ module.exports = {
         throw new Error('webpack-dev-server is not defined')
       }
 
-      const port = devServer.server.address().port
-      console.log('App started on port:', port)
+      console.table({
+        PORT: devServer.server.address().port,
+      })
     },
   },
 }
