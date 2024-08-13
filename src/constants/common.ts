@@ -9,14 +9,3 @@ export const CSS_UNITS = {
   svh: 'svh',
   '%': '%',
 }
-
-export const DISPLAY_TYPES = {
-  block: 'block',
-  flex: 'flex',
-  grid: 'grid',
-  inline: 'inline',
-  inlineBlock: 'inline-block',
-  inlineFlex: 'inline-flex',
-  inlineGrid: 'inline-grid',
-  none: 'none',
-}

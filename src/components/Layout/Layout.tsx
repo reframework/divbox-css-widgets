@@ -3,7 +3,6 @@ import {
   FLEX_DISPLAY_ADD_OPTIONS,
   FLEX_DISPLAY_MAIN_OPTIONS,
 } from '@src/constants/flex'
-import { DISPLAY_TYPES } from '@src/constants/common'
 import { ContentWrapper } from '@src/components/ContentWrapper'
 import { FlexContent } from '@src/components/Layout/FlexContent'
 import { GridContent } from '@src/components/Layout/GridContent'
@@ -57,7 +56,7 @@ export const Layout = () => {
       <ContentWrapper title={'Display'}>
         <Segmented
           defaultValue={layout.d}
-          addOptsDefaultValue={DISPLAY_TYPES.none}
+          addOptsDefaultValue={Css.Enum.Display.NONE}
           mainDefaultOptions={FLEX_DISPLAY_MAIN_OPTIONS}
           additionalOptions={FLEX_DISPLAY_ADD_OPTIONS}
           onChange={onDisplayTypeChange}
