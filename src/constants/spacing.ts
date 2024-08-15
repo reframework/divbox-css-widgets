@@ -2,6 +2,7 @@ import { LengthLiteral } from '@src/models/css/enums'
 
 export const MARGIN_BUTTON_VALUES = [
   LengthLiteral.AUTO,
+  0,
   10,
   20,
   40,
@@ -10,4 +11,4 @@ export const MARGIN_BUTTON_VALUES = [
   150,
   200,
 ]
-export const PADDING_BUTTON_VALUES = [10, 20, 40, 60, 80, 100, 125, 150, 200]
+export const PADDING_BUTTON_VALUES = [0, 10, 20, 40, 60, 80, 100, 125, 150, 200]

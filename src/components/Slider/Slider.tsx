@@ -52,11 +52,13 @@ export const Slider: React.FC<Props> = ({
         <>
           <InputNumber
             label={'Columns'}
+            min={0}
             onChange={onColumnsChange}
             value={columnsInputValue}
           />
           <InputNumber
             label={'Rows'}
+            min={0}
             onChange={onRowsChange}
             value={rowsInputValue}
           />

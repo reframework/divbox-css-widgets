@@ -12,12 +12,11 @@ import {
 } from '@src/models/css/enums'
 import { ILength, LengthModel } from '@src/models/css/length'
 import { ITextShadow } from '@src/models/css/shadows'
-import { Scope } from 'eslint'
-import Variable = Scope.Variable
+import { IVariable } from '@src/models/css/spacing'
 
 export type ILetterSpacing = ILength | LetterSpacingLiteral.NORMAL
-export type ILineHeight = ILength | Variable
-export type IFontSize = ILength | Variable
+export type ILineHeight = ILength | IVariable
+export type IFontSize = ILength | IVariable
 
 export type ITypography = {
   f: FontFamily

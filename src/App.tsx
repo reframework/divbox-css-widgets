@@ -62,6 +62,12 @@ export const App = (props: ICssWidgetProps) => {
               controlPaddingHorizontal: '0 2px',
               paddingSM: '0 2px',
             },
+            InputNumber: {
+              activeBorderColor: 'var(--chakra-colors-gray-300)',
+            },
+            Input: {
+              activeBorderColor: 'var(--chakra-colors-gray-300)',
+            },
           },
         }}
       >

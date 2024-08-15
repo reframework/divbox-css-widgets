@@ -5,19 +5,19 @@ export interface HandleActiveStateProps {
 }
 export const HandleActiveState = ({ defaultValue }: HandleActiveStateProps) => {
   const [isActive, setIsActive] = useState<boolean>(defaultValue || false)
-  const toggleActive = useCallback(
-    (value?: boolean) => {
-      if (value) {
-        setIsActive(value)
-      } else {
-        setIsActive((prev) => !prev)
-      }
+  const handleIsActive = useCallback(
+    (value: boolean) => {
+      setIsActive(value)
     },
     [setIsActive],
   )
+  const toggleActive = useCallback(() => {
+    setIsActive((prev) => !prev)
+  }, [setIsActive])
 
   return {
     isActive,
+    handleIsActive,
     toggleActive,
   }
 }

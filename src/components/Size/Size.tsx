@@ -4,6 +4,7 @@ import { LABEL_WIDTH } from '@src/constants/styles'
 
 const Input: React.FC<InputNumberProps> = (props) => (
   <InputNumber
+    min={0}
     labelPosition={'left'}
     labelWrapperStyles={{ width: LABEL_WIDTH }}
     {...props}
