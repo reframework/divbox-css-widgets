@@ -1,6 +1,6 @@
 import { Box, Grid } from '@chakra-ui/react'
 import { styles } from '@src/components/Spacing/Spacing.styles'
-import { Button } from '@src/components/Spacing/Button/Button'
+import { Button } from '@src/components/Spacing/Button'
 import { MARGIN_BUTTON_VALUES, PADDING_BUTTON_VALUES } from '@src/constants/spacing'
 
 export const Spacing = () => {

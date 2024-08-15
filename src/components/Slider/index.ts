@@ -1,3 +1,1 @@
-export const Slidero = () => {
-  return
-}
+export * from './Slider'

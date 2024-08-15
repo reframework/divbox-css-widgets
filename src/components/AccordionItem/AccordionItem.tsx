@@ -29,7 +29,7 @@ export const AccordionItem: React.FC<Props> = ({ title, children }) => {
           <AccordionIcon />
         </AccordionButton>
       </h2>
-      <AccordionPanel p={'4px'} pb={4}>
+      <AccordionPanel p={1} pb={4}>
         {children}
       </AccordionPanel>
     </ChakraAccordionItem>

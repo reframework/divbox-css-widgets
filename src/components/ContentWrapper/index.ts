@@ -1,1 +1,1 @@
-export * from '@src/components/ContentWrapper/ContentWrapper'
+export * from './ContentWrapper'

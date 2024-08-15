@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Button as ChakraButton } from '@chakra-ui/react'
 import { Popover } from 'antd'
 import { HandleActiveState } from '@src/hooks/handleActiveState'
-import { PopoverContent } from '@src/components/Spacing/PopoverContent/PopoverContent'
+import { PopoverContent } from '@src/components/Spacing/PopoverContent'
 
 interface Props {
   values: (number | string)[]
