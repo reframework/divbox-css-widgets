@@ -1,4 +1,4 @@
-import { Display, Position, VerticalAlign } from '@src/models/css/enums'
+import { Display, VerticalAlign } from '@src/models/css/enums'
 import { IFlex } from '@src/models/css/flex'
 import { IGrid } from '@src/models/css/grid'
 

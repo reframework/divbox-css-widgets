@@ -1,4 +1,4 @@
-import { HexColorModel, IColor } from '@src/models/css/color'
+import { IColor } from '@src/models/css/color'
 import { BorderStyle } from '@src/models/css/enums'
 import { ILength } from '@src/models/css/length'
 import { IVariable } from '@src/models/css/spacing'

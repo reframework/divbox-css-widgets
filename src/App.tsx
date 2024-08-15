@@ -7,6 +7,7 @@ import { ChakraProvider } from '@chakra-ui/react'
 import { Widget } from '@src/components/Widget'
 import { ctx } from '@src/components/Context'
 import { ICssWidgetProps } from '@src/types/props'
+import { fonts } from '@src/components/theme/fonts'
 
 export const App = (props: ICssWidgetProps) => {
   return (
@@ -80,5 +81,5 @@ export const App = (props: ICssWidgetProps) => {
 export default hot(App)
 
 export const GlobalStyles = () => {
-  return <Global styles={[colors]} />
+  return <Global styles={[colors, fonts]} />
 }

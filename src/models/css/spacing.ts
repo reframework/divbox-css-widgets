@@ -1,14 +1,14 @@
-import { LengthUnit } from '@src/models/css/enums'
+import { LengthLiteral } from '@src/models/css/enums'
 import { ILength } from '@src/models/css/length'
 
 export type IVariable = string
 
 export type IMargin = {
   /** The margin on the top side. Default is null. */
-  t: ILength | IVariable | LengthUnit.AUTO | null
-  r: ILength | IVariable | LengthUnit.AUTO | null
-  b: ILength | IVariable | LengthUnit.AUTO | null
-  l: ILength | IVariable | LengthUnit.AUTO | null
+  t: ILength | IVariable | LengthLiteral.AUTO | null
+  r: ILength | IVariable | LengthLiteral.AUTO | null
+  b: ILength | IVariable | LengthLiteral.AUTO | null
+  l: ILength | IVariable | LengthLiteral.AUTO | null
 }
 
 export type IPadding = {

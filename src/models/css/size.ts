@@ -1,9 +1,9 @@
-import { LengthUnit, SizeLiteral } from '@src/models/css/enums'
+import { LengthLiteral, SizeLiteral } from '@src/models/css/enums'
 import { ILength } from '@src/models/css/length'
 import { IVariable } from '@src/models/css/spacing'
 
-export type IWidth = ILength | IVariable | LengthUnit.AUTO | SizeLiteral | null
-export type IHeight = ILength | IVariable | LengthUnit.AUTO | SizeLiteral | null
+export type IWidth = ILength | IVariable | LengthLiteral.AUTO | SizeLiteral | null
+export type IHeight = ILength | IVariable | LengthLiteral.AUTO | SizeLiteral | null
 
 export type ISize = {
   w: IWidth

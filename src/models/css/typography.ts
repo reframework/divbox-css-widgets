@@ -6,14 +6,14 @@ import {
   LetterSpacingLiteral,
   TextAlign,
   TextDecoration,
-  TextDirection,
   TextTransform,
   WhiteSpace,
   WordBreak,
 } from '@src/models/css/enums'
 import { ILength, LengthModel } from '@src/models/css/length'
 import { ITextShadow } from '@src/models/css/shadows'
-import { Variable } from '@src/models/css/spacing'
+import { Scope } from 'eslint'
+import Variable = Scope.Variable
 
 export type ILetterSpacing = ILength | LetterSpacingLiteral.NORMAL
 export type ILineHeight = ILength | Variable
@@ -31,7 +31,7 @@ export type ITypography = {
   ttr: TextTransform | null // none
   wbr: WordBreak | null // normal
   whs: WhiteSpace | null // normal
-  dir: TextDirection | null // ltr
+  // dir: TextDirection | null // ltr //todo
   shd: ITextShadow | null
 }
 
@@ -48,7 +48,7 @@ export const TypographyModel = (props?: Partial<ITypography>): ITypography => {
     ttr: props?.ttr || null,
     wbr: props?.wbr || null,
     whs: props?.whs || null,
-    dir: props?.dir || null,
+    // dir: props?.dir || null,
     shd: props?.shd || null,
   }
 }
