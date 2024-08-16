@@ -1,5 +1,5 @@
-import { Input, InputProps, Select, SelectProps } from 'antd'
-import { useEffect, useMemo, useState } from 'react'
+import { Input, InputProps, InputRef, Select, SelectProps } from 'antd'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Css } from '@src/models/css'
 import { inputStyle } from '@src/components/CssUnitInput/styles'
 import {
@@ -11,6 +11,7 @@ import {
   lengthUnits,
   getCssUnitValue,
 } from '@src/components/CssUnitInput/utils'
+import { debounce } from 'lodash'
 
 export type IUnitSelectOption = {
   value: ISelectUnitType
@@ -56,6 +57,7 @@ export const CssUnitInput: React.FC<ICssUnitInputProps> = ({
   onClose,
   ...props
 }) => {
+  const ref = useRef<InputRef>(null)
   const [value, setValue] = useState(() => getRawValue(valueProp))
   const [unit, setUnit] = useState(() => getRawUnitType(valueProp) || defaultUnit)
 
@@ -73,7 +75,14 @@ export const CssUnitInput: React.FC<ICssUnitInputProps> = ({
   useEffect(() => {
     setValue(getRawValue(valueProp))
     setUnit(getRawUnitType(valueProp) || defaultUnit)
+    focus()
   }, [valueProp, defaultUnit])
+
+  const focus = useCallback(() => {
+    if (ref.current?.nativeElement) {
+      focusInput(ref.current.nativeElement)
+    }
+  }, [])
 
   const onChangeValue: InputProps['onChange'] = ({ target }) => {
     const { value } = target
@@ -82,6 +91,7 @@ export const CssUnitInput: React.FC<ICssUnitInputProps> = ({
 
   const onChangeUnitType = (unitValue: ISelectUnitType) => {
     setUnit(unitValue)
+    focus()
 
     if (unitValue === Css.Enum.LengthLiteral.AUTO) {
       setValue(unitValue)
@@ -132,8 +142,8 @@ export const CssUnitInput: React.FC<ICssUnitInputProps> = ({
   return (
     <Input
       {...props}
+      ref={ref}
       css={inputStyle}
-      autoFocus
       value={value}
       onChange={onChangeValue}
       addonAfter={selectAfter}
@@ -143,3 +153,7 @@ export const CssUnitInput: React.FC<ICssUnitInputProps> = ({
     />
   )
 }
+
+const focusInput = debounce((input: HTMLElement) => {
+  requestAnimationFrame(() => input && input?.focus())
+}, 100)

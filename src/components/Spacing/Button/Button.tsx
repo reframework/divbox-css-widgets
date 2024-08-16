@@ -50,6 +50,7 @@ export const SpacingValueButton: React.FC<Props> = ({
     <Popover
       open={isOpened}
       onOpenChange={setIsOpened}
+      destroyTooltipOnHide
       content={
         <PopoverContent
           value={value}
@@ -121,6 +122,6 @@ const textProps = {
 } as const
 
 const highlightedProps = {
-  bg: 'blue.50',
+  bgColor: 'var(--divbox-highlight-bg-blue-50)',
   color: 'blue.600',
 } as const

@@ -96,7 +96,11 @@ export const GlobalStyles = () => {
         colors,
         fonts,
         css`
-          --control-height: ${(26 / 16).toFixed(2)}rem;
+          :root {
+            --divbox-highlight-bg-blue-50: rgba(235, 248, 255, 0.8);
+            --divbox-highlight-bg-blue-100: rgba(198, 227, 248, 0.8);
+            --control-height: ${(26 / 16).toFixed(2)}rem;
+          }
         `,
       ]}
     />
