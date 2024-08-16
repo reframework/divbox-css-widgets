@@ -25,25 +25,31 @@ export const Spacing = () => {
     debouncedOnChange(internalValue)
   }, [internalValue, debouncedOnChange])
 
-  const onChangeMargin = useCallback((next: ICssUnitValue | null, prop: string) => {
-    setInternalValue({
-      ...value,
-      margin: {
-        ...value.margin,
-        [prop]: next,
-      },
-    })
-  }, [])
+  const onChangeMargin = useCallback(
+    (next: ICssUnitValue | null, prop: string) => {
+      setInternalValue({
+        ...value,
+        margin: {
+          ...value.margin,
+          [prop]: next,
+        },
+      })
+    },
+    [value],
+  )
 
-  const onChangePadding = useCallback((next: ICssUnitValue | null, prop: string) => {
-    setInternalValue({
-      ...value,
-      padding: {
-        ...value.padding,
-        [prop]: next,
-      },
-    })
-  }, [])
+  const onChangePadding = useCallback(
+    (next: ICssUnitValue | null, prop: string) => {
+      setInternalValue({
+        ...value,
+        padding: {
+          ...value.padding,
+          [prop]: next,
+        },
+      })
+    },
+    [value],
+  )
 
   return (
     <Grid height={'124px'} width={'100%'} position={'relative'}>
@@ -52,7 +58,7 @@ export const Spacing = () => {
         <SpacingValueButton
           presets={MARGIN_PRESETS}
           isMargin
-          value={internalValue.margin.l}
+          value={internalValue.margin.t}
           onChange={onChangeMargin}
           property={'t'}
         />
@@ -61,7 +67,7 @@ export const Spacing = () => {
         <SpacingValueButton
           presets={MARGIN_PRESETS}
           isMargin
-          value={internalValue.margin.t}
+          value={internalValue.margin.l}
           onChange={onChangeMargin}
           property={'l'}
         />
@@ -71,7 +77,7 @@ export const Spacing = () => {
         <Box css={styles.box3_1}>
           <SpacingValueButton
             presets={PADDING_PRESETS}
-            value={internalValue.padding.l}
+            value={internalValue.padding.t}
             onChange={onChangePadding}
             property={'t'}
           />
@@ -79,7 +85,7 @@ export const Spacing = () => {
         <Box css={styles.box3_2}>
           <SpacingValueButton
             presets={PADDING_PRESETS}
-            value={internalValue.padding.t}
+            value={internalValue.padding.l}
             onChange={onChangePadding}
             property={'l'}
           />

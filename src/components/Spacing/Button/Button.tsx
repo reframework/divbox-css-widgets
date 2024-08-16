@@ -23,15 +23,14 @@ export const SpacingValueButton: React.FC<Props> = ({
   onChange: onChangeProp,
   property,
 }) => {
-  const { isActive, handleIsActive } = HandleActiveState({ defaultValue: false })
   const [isOpened, setIsOpened] = useState(false)
 
-  const isEmpty = CssUnit.Util.isEmptyValue(value)
-  const isHighlighted = !isEmpty || isActive || isOpened
+  if (isOpened) {
+    console.log(property, value)
+  }
 
-  useEffect(() => {
-    handleIsActive(!!value)
-  }, [value, handleIsActive])
+  const isEmpty = CssUnit.Util.isEmptyValue(value)
+  const isHighlighted = !isEmpty || isOpened
 
   const onChange = useCallback(
     (value: ICssUnitValue) => onChangeProp(value, property),
