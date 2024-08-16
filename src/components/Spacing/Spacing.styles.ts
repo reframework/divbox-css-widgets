@@ -153,7 +153,7 @@ export const styles = {
     left: var(--chakra-space-0-5);
     font-weight: 200;
     color: var(--chakra-colors-gray-600);
-    font-size: var(--fontSizes-xxxs);
+    font-size: 0.7rem;
     font-style: italic;
     z-index: var(--chakra-zIndices-docked);
   `,
