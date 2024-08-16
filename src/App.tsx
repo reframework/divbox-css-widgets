@@ -1,12 +1,13 @@
 import { hot } from 'react-hot-loader/root'
 import { ErrorBoundary } from 'react-error-boundary'
 import { App as AntApp, ConfigProvider } from 'antd'
-import { Global } from '@emotion/react'
+import { css, Global } from '@emotion/react'
 import { colors } from '@src/components/theme/colors'
 import { ChakraProvider } from '@chakra-ui/react'
 import { Widget } from '@src/components/Widget'
 import { ctx } from '@src/components/Context'
 import { ICssWidgetProps } from '@src/types/props'
+import { fonts } from '@src/components/theme/fonts'
 
 export const App = (props: ICssWidgetProps) => {
   return (
@@ -54,12 +55,21 @@ export const App = (props: ICssWidgetProps) => {
             Select: {
               colorPrimaryHover: 'var(--chakra-colors-gray-900)',
               colorPrimary: 'var(--chakra-colors-gray-900)',
-              optionActiveBg: 'var(--chakra-colors-gray-50)',
-              optionSelectedBg: 'var(--color-gray-2)',
+              optionActiveBg: 'var(--chakra-colors-gray-100)',
+              optionSelectedBg: 'var(--chakra-colors-blue-50)',
+              optionPadding: '0 var(--chakra-space-2)',
+              optionHeight: 'var(--control-height)',
+              optionLineHeight: '26px',
               fontSize: 'var(--chakra-fontSizes-xs)',
               controlHeight: 'var(--chakra-space-7)',
               controlPaddingHorizontal: '0 2px',
               paddingSM: '0 2px',
+            },
+            InputNumber: {
+              activeBorderColor: 'var(--chakra-colors-gray-300)',
+            },
+            Input: {
+              activeBorderColor: 'var(--chakra-colors-gray-300)',
             },
           },
         }}
@@ -80,5 +90,15 @@ export const App = (props: ICssWidgetProps) => {
 export default hot(App)
 
 export const GlobalStyles = () => {
-  return <Global styles={[colors]} />
+  return (
+    <Global
+      styles={[
+        colors,
+        fonts,
+        css`
+          --control-height: ${(26 / 16).toFixed(2)}rem;
+        `,
+      ]}
+    />
+  )
 }

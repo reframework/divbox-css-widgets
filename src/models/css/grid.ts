@@ -1,7 +1,7 @@
 import {
   BetweenAround,
   GridAutoFlow,
-  LengthUnit,
+  LengthLiteral,
   StartCenterEnd,
   StretchBaseline,
 } from '@src/models/css/enums'
@@ -10,7 +10,7 @@ import { GapModel, IGap } from '@src/models/css/gap'
 import { ILength } from '@src/models/css/length'
 import { IMinMax } from '@src/models/css/minmax'
 
-export type IGridTrack = ILength | IFrTrack | IMinMax | LengthUnit.AUTO
+export type IGridTrack = ILength | IFrTrack | IMinMax | LengthLiteral.AUTO
 
 export interface IGrid {
   /** Horizontal alignment of grid items along the X-axis. Default is 'stretch'. */

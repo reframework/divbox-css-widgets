@@ -1,12 +1,12 @@
-import { LengthUnit, Position } from '@src/models/css/enums'
+import { LengthLiteral, Position } from '@src/models/css/enums'
 import { ILength } from '@src/models/css/length'
 import { IVariable } from '@src/models/css/spacing'
 
 export type IInset = {
-  t: ILength | IVariable | LengthUnit.AUTO | null
-  r: ILength | IVariable | LengthUnit.AUTO | null
-  b: ILength | IVariable | LengthUnit.AUTO | null
-  l: ILength | IVariable | LengthUnit.AUTO | null
+  t: ILength | IVariable | LengthLiteral.AUTO | null
+  r: ILength | IVariable | LengthLiteral.AUTO | null
+  b: ILength | IVariable | LengthLiteral.AUTO | null
+  l: ILength | IVariable | LengthLiteral.AUTO | null
 }
 
 export interface IPosition {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { CheckboxOptionType, Dropdown, MenuProps, Radio, Select } from 'antd'
+import { CheckboxOptionType, Dropdown, MenuProps } from 'antd'
 import { IoIosArrowDown } from 'react-icons/io'
 import { RadioChangeEvent } from 'antd/es/radio/interface'
 import { RadioButton, RadioGroup } from '@src/components/Segmented/Segmented.styles'

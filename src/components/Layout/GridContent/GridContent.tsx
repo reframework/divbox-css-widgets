@@ -18,8 +18,8 @@ export const GridContent = ({ model }: IGridContentProps) => {
     <>
       <ContentWrapper title={'Grid'}>
         <Grid templateColumns={'1fr 1fr 24px'} gap={'5px'}>
-          <InputNumber defaultValue={0} controls label={'Columns'} />
-          <InputNumber defaultValue={0} controls label={'Rows'} />
+          <InputNumber min={0} defaultValue={0} controls label={'Columns'} />
+          <InputNumber min={0} defaultValue={0} controls label={'Rows'} />
           <IconButton
             icon={<RiSettings5Fill fontSize={'11px'} />}
             ariaLabel={'button'} //todo

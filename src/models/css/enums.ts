@@ -1,3 +1,6 @@
+export enum LengthLiteral {
+  AUTO = 'auto',
+}
 export enum LengthUnit {
   PX = 'px',
   REM = 'rem',
@@ -8,7 +11,10 @@ export enum LengthUnit {
   VH = 'vh',
   SVW = 'svw',
   SVH = 'svh',
-  AUTO = 'auto',
+}
+
+export enum FractionUnit {
+  FR = 'fr',
 }
 
 export enum SizeLiteral {
