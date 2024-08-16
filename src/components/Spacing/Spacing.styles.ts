@@ -152,7 +152,7 @@ export const styles = {
     top: 0;
     left: var(--chakra-space-0-5);
     font-weight: 200;
-    color: var(--chakra-colors-gray-500);
+    color: var(--chakra-colors-gray-600);
     font-size: var(--fontSizes-xxxs);
     font-style: italic;
     z-index: var(--chakra-zIndices-docked);

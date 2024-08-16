@@ -1,160 +1,186 @@
-import React, { useEffect, useState } from 'react'
-import { CheckboxOptionType, Dropdown, MenuProps } from 'antd'
+import React, { ReactNode, useMemo } from 'react'
+import { Dropdown } from 'antd'
 import { IoIosArrowDown } from 'react-icons/io'
-import { RadioChangeEvent } from 'antd/es/radio/interface'
-import { RadioButton, RadioGroup } from '@src/components/Segmented/Segmented.styles'
-import { toMakeUpperFirstChar } from '@src/helpers'
-import { Box, IconButton } from '@chakra-ui/react'
-import { ItemType } from 'antd/es/menu/interface'
+import { Button, ButtonGroup, Center, Icon } from '@chakra-ui/react'
+
+export type ISegmentedItem = {
+  label: ReactNode
+  key: string
+}
+
+type SegmentedMenuDefaultItem = {
+  label: ReactNode
+  buttonLabel: ReactNode
+  key: string
+  icon?: ReactNode
+}
+
+type SegmentedMenuGroupItem = {
+  type: 'group'
+  label: ReactNode
+  key: string
+  children: SegmentedMenuDefaultItem[]
+  icon?: ReactNode
+}
+
+export type ISegmentedMenuItem =
+  | SegmentedMenuDefaultItem
+  | { type: 'divider' }
+  | SegmentedMenuGroupItem
 
 interface Props {
-  defaultValue?: string | number
-  addOptsDefaultValue?: string | number
-  mainDefaultOptions: (string | number)[] | Array<CheckboxOptionType>
-  additionalOptions?: ItemType[]
-  additionalOptionLabelProp?: string
-  onChange?: (value: string | number) => void
-  menuProps?: MenuProps
+  value: string
+  options: ISegmentedItem[]
+  onChange?: (value: string) => void
+  menuItems?: ISegmentedMenuItem[]
+  defaultSelectedKey?: string
 }
 
 export const Segmented: React.FC<Props> = ({
-  defaultValue,
-  addOptsDefaultValue,
-  mainDefaultOptions,
-  additionalOptions,
-  additionalOptionLabelProp = 'label',
+  options,
   onChange,
-  menuProps,
+  value,
+  menuItems,
+  defaultSelectedKey,
 }) => {
-  const itemsCount = mainDefaultOptions?.length + (additionalOptions?.length ? 1 : 0)
-  const isAdditionalOptions = Boolean(additionalOptions?.length)
-  const [value, setValue] = useState<string | number>(
-    defaultValue || mainDefaultOptions[0]?.value || mainDefaultOptions[0],
+  const [selectedKey, setSelectedKey] = React.useState<string | undefined>(
+    defaultSelectedKey,
   )
-  const [isChangedAddOptSelect, setIsChangedAddOptSelect] = useState(false)
 
-  const [addOptsValue, setAddOptsValue] = useState<ItemType | undefined>()
-
-  const findAddOptsItem = (key: string) => {
-    let result
-    ;(additionalOptions || [])?.forEach((item: any) => {
-      if (item?.children?.length) {
-        const value = item.children.find((val) => val.key === key)
-        if (value) {
-          result = value
-        }
-      } else {
-        if (item.key === key) {
-          result = item
-        }
-      }
-    })
-    return result
-  }
-
-  useEffect(() => {
-    if (addOptsDefaultValue) {
-      setAddOptsValue(findAddOptsItem(String(addOptsDefaultValue)))
-      return
-    }
-    if (!defaultValue) {
-      const res =
-        (additionalOptions as any)?.[0].children?.[0] || additionalOptions?.[0]
-      setAddOptsValue(res)
-      return
-    }
-    const item = findAddOptsItem(String(defaultValue))
-    if (item) {
-      setIsChangedAddOptSelect(true)
-      setAddOptsValue(item)
-      return
-    }
-    setAddOptsValue(
-      (additionalOptions as any)?.[0].children?.[0] || additionalOptions?.[0],
-    )
-  }, [])
-
-  const handleChange = ({ target: { value } }: RadioChangeEvent) => {
-    setValue(value)
-    setIsChangedAddOptSelect(false)
+  const handleChange = (value: string) => {
     onChange?.(value)
   }
+
   const onSelect = ({ key }: any) => {
-    setValue(key)
-    const item = findAddOptsItem(String(key))
-    setAddOptsValue(item)
-    setIsChangedAddOptSelect(true)
+    setSelectedKey(key)
     onChange?.(key)
   }
+
+  const currentOptions = useMemo(() => {
+    return mapSegmentedOptions({
+      options,
+      menuItems,
+      selectedKey: selectedKey || defaultSelectedKey,
+    })
+  }, [options, menuItems, value, selectedKey, defaultSelectedKey])
+
   return (
-    <RadioGroup
-      buttonStyle={'solid'}
-      defaultValue={value}
-      onChange={handleChange}
-      value={value}
-      itemsCount={itemsCount}
-      isAdditionalOptions={isAdditionalOptions}
+    <ButtonGroup
+      isAttached
+      width="100%"
+      size="xs"
+      overflow="hidden"
+      border="1px solid"
+      borderColor="gray.300"
+      borderRadius="md"
     >
-      {mainDefaultOptions.map((item) => {
-        const value = (item as CheckboxOptionType)?.value || item
-        const label =
-          (item as CheckboxOptionType)?.label || toMakeUpperFirstChar(String(item))
+      {currentOptions.map((item, idx, { length }) => {
+        const withMenu = idx === length - 1 && menuItems?.length
+
+        if (withMenu) {
+          return (
+            <Button
+              {...buttonProps(value === item.key)}
+              minW="50px"
+              justifyContent="space-between"
+              p="1"
+              pr="0"
+              onClick={() => {
+                handleChange(item.key)
+              }}
+            >
+              <Center flexGrow="1">{item.label}</Center>
+              <Dropdown
+                trigger={['click']}
+                placement={'bottomRight'}
+                menu={{
+                  items: menuItems,
+                  selectable: true,
+                  selectedKeys: [value],
+                  onSelect,
+                  onClick: ({ domEvent }) => {
+                    domEvent.stopPropagation()
+                  },
+                }}
+              >
+                <Center role="button" aria-label="More options" minW="16px" h="26px">
+                  <Icon
+                    as={IoIosArrowDown}
+                    color="gray-700"
+                    size="xs"
+                    aria-label="button"
+                  />
+                </Center>
+              </Dropdown>
+            </Button>
+          )
+        }
+
         return (
-          <RadioButton key={value} value={value}>
-            <Box
-              display={'flex'}
-              height={'100%'}
-              justifyContent={'center'}
-              alignItems={'center'}
-            >
-              {label}
-            </Box>
-          </RadioButton>
-        )
-      })}
-      {isAdditionalOptions && (
-        <>
-          <RadioButton
-            key={addOptsValue?.key}
-            value={addOptsValue?.key}
-            bg={'transparent'}
-          >
-            <Box
-              display={'flex'}
-              height={'100%'}
-              justifyContent={'center'}
-              alignItems={'center'}
-            >
-              {addOptsValue?.[additionalOptionLabelProp]}
-            </Box>
-          </RadioButton>
-          <Dropdown
-            trigger={['click']}
-            placement={'bottomRight'}
-            menu={{
-              items: additionalOptions,
-              selectable: true,
-              defaultSelectedKeys: [addOptsValue?.key],
-              onSelect,
-              ...menuProps,
+          <Button
+            {...buttonProps(value === item.key)}
+            onClick={() => {
+              handleChange(item.key)
             }}
           >
-            <IconButton
-              aria-label={'dropdown button'}
-              style={{
-                ...(isChangedAddOptSelect && {
-                  background: 'var(--chakra-colors-gray-300)',
-                }),
-              }}
-              bg={'transparent'}
-              borderRadius={0}
-              size={'s'}
-              width={'100%'}
-              icon={<IoIosArrowDown color={'var(--chakra-colors-gray-900)'} />}
-            />
-          </Dropdown>
-        </>
-      )}
-    </RadioGroup>
+            {item.label}
+          </Button>
+        )
+      })}
+    </ButtonGroup>
   )
+}
+
+const buttonProps = (active: boolean) => ({
+  h: '26px',
+  flexGrow: '1',
+  variant: 'ghost',
+  bg: active ? 'gray.200' : 'gray.50',
+  fontWeight: active ? '500' : '400',
+})
+
+const mapSegmentedOptions = (props: {
+  options: ISegmentedItem[]
+  menuItems?: ISegmentedMenuItem[]
+  selectedKey?: string
+}): ISegmentedItem[] => {
+  const { options, menuItems, selectedKey } = props
+
+  if (!menuItems?.length) {
+    return options
+  }
+
+  const items = menuItems.flatMap((item) => {
+    if (isDividerItem(item)) {
+      return []
+    }
+
+    if (isGroupItem(item)) {
+      return item.children.map(toSegmentedItem) || []
+    }
+
+    return [toSegmentedItem(item)]
+  })
+
+  const selectedItem = items.find((item) => item?.key === selectedKey)
+  if (!selectedItem) {
+    return options
+  }
+
+  return selectedItem ? [...options, selectedItem] : options
+}
+
+const isGroupItem = (item: ISegmentedMenuItem): item is SegmentedMenuGroupItem => {
+  return 'type' in item && item.type === 'group'
+}
+
+const isDividerItem = (item: ISegmentedMenuItem): item is { type: 'divider' } => {
+  return 'type' in item && item.type === 'divider'
+}
+
+const toSegmentedItem = (item: SegmentedMenuDefaultItem): ISegmentedItem | null => {
+  return {
+    key: item.key,
+    label: item.buttonLabel,
+  }
 }

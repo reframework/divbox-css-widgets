@@ -75,8 +75,11 @@ export const CssUnitInput: React.FC<ICssUnitInputProps> = ({
   useEffect(() => {
     setValue(getRawValue(valueProp))
     setUnit(getRawUnitType(valueProp) || defaultUnit)
-    focus()
   }, [valueProp, defaultUnit])
+
+  useEffect(() => {
+    focus()
+  }, [])
 
   const focus = useCallback(() => {
     if (ref.current?.nativeElement) {
@@ -132,7 +135,6 @@ export const CssUnitInput: React.FC<ICssUnitInputProps> = ({
       suffixIcon={null}
       dropdownStyle={{
         width: '60px',
-        padding: 'var(--chakra-space-1)',
       }}
       placement={'bottomRight'}
       listHeight={500}

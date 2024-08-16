@@ -28,11 +28,11 @@ export const GridContent = ({ model }: IGridContentProps) => {
       </ContentWrapper>
       <ContentWrapper title={'Direction'}>
         <Grid templateColumns={'1fr 24px'} gap={'5px'}>
-          <Segmented
+          {/* <Segmented
             defaultValue={GRID_DIRECTION_MAIN_OPTIONS[0].value}
             mainDefaultOptions={GRID_DIRECTION_MAIN_OPTIONS}
             additionalOptionLabelProp={'icon'}
-          />
+          /> */}
           <IconButton
             icon={<BsQuestion fontSize={'xs'} />}
             ariaLabel={'button'} //todo

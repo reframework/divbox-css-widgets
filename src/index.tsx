@@ -1,4 +1,6 @@
+import { Box, ChakraProvider, Flex } from '@chakra-ui/react'
 import { App } from '@src/App'
+import { WIDGET_WIDTH } from '@src/constants/styles'
 import { Css } from '@src/models/css'
 import { ICssWidgetProps } from '@src/types/props'
 import { useCallback, useState } from 'react'
@@ -23,14 +25,20 @@ const MockProvider = () => {
   }, [])
 
   return (
-    <App
-      {...({
-        isVar,
-        getVarRawValue,
-        value: state,
-        onChange,
-      } as ICssWidgetProps)}
-    />
+    <ChakraProvider>
+      <Flex w="100%" justifyContent="flex-end">
+        <Box bg={'gray.50'} maxW={WIDGET_WIDTH} minH="100vh" w="100%">
+          <App
+            {...({
+              isVar,
+              getVarRawValue,
+              value: state,
+              onChange,
+            } as ICssWidgetProps)}
+          />
+        </Box>
+      </Flex>
+    </ChakraProvider>
   )
 }
 

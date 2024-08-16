@@ -15,50 +15,6 @@ export const GRID_DIRECTION_MAIN_OPTIONS = [
   },
 ]
 
-export const FLEX_DISPLAY_MAIN_OPTIONS = [
-  {
-    value: Css.Enum.Display.BLOCK,
-    label: toMakeUpperFirstChar(Css.Enum.Display.BLOCK),
-  },
-  {
-    value: Css.Enum.Display.FLEX,
-    label: toMakeUpperFirstChar(Css.Enum.Display.FLEX),
-  },
-  {
-    value: Css.Enum.Display.GRID,
-    label: toMakeUpperFirstChar(Css.Enum.Display.GRID),
-  },
-]
-
-export const FLEX_DISPLAY_ADD_OPTIONS = [
-  {
-    key: Css.Enum.Display.INLINE_BLOCK,
-    label: toMakeUpperFirstChar(Css.Enum.Display.INLINE_BLOCK),
-    label_prop: 'Inl-blk',
-  },
-  {
-    key: Css.Enum.Display.INLINE_FLEX,
-    label: toMakeUpperFirstChar(Css.Enum.Display.INLINE_FLEX),
-    label_prop: 'Inl-flx',
-  },
-  {
-    key: Css.Enum.Display.INLINE_GRID,
-    label: toMakeUpperFirstChar(Css.Enum.Display.INLINE_GRID),
-    label_prop: 'Inl-grd',
-  },
-  {
-    key: Css.Enum.Display.INLINE,
-    label: toMakeUpperFirstChar(Css.Enum.Display.INLINE),
-    label_prop: 'Inln',
-  },
-  { type: 'divider' },
-  {
-    key: Css.Enum.Display.NONE,
-    label: toMakeUpperFirstChar(Css.Enum.Display.NONE),
-    label_prop: 'None',
-  },
-]
-
 const AddOptsLabelWrapper: React.FC = ({ children }) => (
   <Box fontSize={'12px'} display={'flex'} alignItems={'center'} gap={'5px'}>
     {children}

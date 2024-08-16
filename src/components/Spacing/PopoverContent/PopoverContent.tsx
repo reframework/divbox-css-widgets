@@ -24,7 +24,7 @@ export const PopoverContent: React.FC<Props> = ({
 }) => {
   return (
     <>
-      <Grid bg="white" templateColumns="3fr 2fr" gap={1}>
+      <Grid bg="white" templateColumns="3fr 2fr" gap="2">
         <GridItem>
           <CssUnit.Slider
             onChange={onChange}
@@ -41,7 +41,7 @@ export const PopoverContent: React.FC<Props> = ({
           />
         </GridItem>
       </Grid>
-      <Grid mt="2" bg="white" templateColumns="repeat(5, 1fr)" gap={1}>
+      <Grid mt="1" bg="white" templateColumns="repeat(5, 1fr)" gap={1}>
         {isMargin && (
           <GridItem rowSpan={2}>
             <Button

@@ -10,6 +10,11 @@ export const ellipsisStyles = css`
 
 export const RadioButton = styled(Radio.Button)`
   font-size: 12px;
+  padding: 0px;
+  display: flex !important;
+  max-height: 24px;
+  border: none !important;
+
   &.ant-radio-button-wrapper-disabled {
     background: transparent;
     color: var(--chakra-colors-gray-900);
@@ -25,7 +30,7 @@ export const RadioButton = styled(Radio.Button)`
 
   &.ant-radio-button-wrapper-checked {
     &:hover {
-      background: var(--chakra-colors-gray-300) !important;
+      background: var(--chakra-colors-gray-200) !important;
       border-color: transparent !important;
     }
     &:not(.ant-radio-button-wrapper-disabled)::before {
@@ -44,15 +49,24 @@ export const RadioGroup = styled(Radio.Group)<{
   itemsCount: number
   isAdditionalOptions: boolean
 }>`
-  display: grid;
-  grid-auto-flow: column;
+  display: flex;
+  /* grid-auto-flow: column;
   grid-template-columns: ${({ itemsCount, isAdditionalOptions }) =>
     isAdditionalOptions
-      ? `repeat(${itemsCount}, 1fr) 27px`
-      : `repeat(${itemsCount}, 1fr)`};
+      ? `1.3fr 1.1fr 1fr 1.1fr 20px`
+      : `repeat(${itemsCount}, 1fr)`}; */
   font-size: 12px;
   background: var(--chakra-colors-gray-50);
   border: 1px solid var(--chakra-colors-gray-300);
   border-radius: 6px;
   overflow: hidden;
+  box-sizing: border-box;
+  max-height: 26px;
+
+  & > * {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 `
