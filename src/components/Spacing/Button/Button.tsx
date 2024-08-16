@@ -117,7 +117,6 @@ const textProps = {
   whiteSpace: 'nowrap',
   p: '2px',
   w: 'min-content',
-  h: '16px',
   borderRadius: 'sm',
 } as const
 
