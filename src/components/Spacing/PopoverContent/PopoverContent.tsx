@@ -1,60 +1,93 @@
-import { Grid, GridItem } from '@chakra-ui/react'
-import { Slider as AntdSlider } from 'antd'
-import { InputNumber } from '@src/components/InputNumber'
-import { Button } from '@src/components/Spacing/PopoverContent/Button'
+import { Box, Button, Grid, GridItem } from '@chakra-ui/react'
 import { LengthLiteral } from '@src/models/css/enums'
-import { ContentType } from '@src/components/Spacing/Button/Button.types'
+import { CssUnit } from '@src/components/CssUnitInput'
+import { ICssUnitValue } from '@src/components/CssUnitInput/utils'
+import { capitalize } from 'lodash'
+import { Css } from '@src/models/css'
+
 interface Props {
-  changeValue: (value: number) => void
-  values: (number | string)[]
-  value: number | string | null
-  contentType: ContentType
+  onChange: (value: ICssUnitValue) => void
+  presets: Css.ILength[]
+  value: ICssUnitValue
+  isMargin?: boolean
+  onReset: (() => void) | null
+  onClose: () => void
 }
 
 export const PopoverContent: React.FC<Props> = ({
-  changeValue,
-  values,
+  onChange,
+  presets,
+  isMargin,
   value,
-  contentType,
+  onReset,
+  onClose,
 }) => {
-  const isMarginContentType = contentType === ContentType.margin
   return (
-    <Grid
-      backgroundColor={'white'}
-      templateRows="repeat(3, 1fr)"
-      templateColumns={`repeat(${isMarginContentType ? 6 : 5}, 1fr)`}
-      rowGap={1}
-      columnGap={2}
-    >
-      <GridItem colSpan={isMarginContentType ? 4 : 3}>
-        <AntdSlider
-          tooltip={{ open: false }}
-          onChange={changeValue}
-          value={typeof value === 'string' || !value ? 0 : value}
-          range
-          min={isMarginContentType ? -200 : 0}
-          max={200}
-        />
-      </GridItem>
-      <GridItem colSpan={2}>
-        <InputNumber onChange={changeValue} value={value} cssUnitsTypes={['auto']} />
-      </GridItem>
-      <>
-        {values.map((item) => {
-          if (item === LengthLiteral.AUTO) {
-            return (
-              <GridItem key={item} rowSpan={2} colSpan={2}>
-                <Button value={item} handleClick={changeValue} />
-              </GridItem>
-            )
-          }
-          return (
-            <GridItem key={item} rowSpan={1} colSpan={1}>
-              <Button value={item} handleClick={changeValue} />
-            </GridItem>
-          )
-        })}
-      </>
-    </Grid>
+    <>
+      <Grid bg="white" templateColumns="3fr 2fr" gap={1}>
+        <GridItem>
+          <CssUnit.Slider
+            onChange={onChange}
+            value={value}
+            allowNegative={isMargin}
+          />
+        </GridItem>
+        <GridItem>
+          <CssUnit.Input
+            onChange={onChange}
+            onClose={onClose}
+            value={value}
+            unitTypes={{ auto: true }}
+          />
+        </GridItem>
+      </Grid>
+      <Grid mt="2" bg="white" templateColumns="repeat(5, 1fr)" gap={1}>
+        {isMargin && (
+          <GridItem rowSpan={2}>
+            <Button
+              {...presetButtonProps}
+              h="100%"
+              onClick={() => onChange(Css.Enum.LengthLiteral.AUTO)}
+              aspectRatio="1/1"
+            >
+              {capitalize(LengthLiteral.AUTO)}
+            </Button>
+          </GridItem>
+        )}
+        {presets.map((item) => (
+          <GridItem key={item.v}>
+            <Button {...presetButtonProps} onClick={() => onChange(item)}>
+              {item.v}
+            </Button>
+          </GridItem>
+        ))}
+      </Grid>
+      <Box mt="2">
+        <Button
+          isDisabled={!onReset}
+          onClick={() => onReset?.()}
+          {...presetButtonProps}
+        >
+          Reset
+        </Button>
+      </Box>
+    </>
   )
 }
+
+/**
+ * TODO: make shared props for gray buttons
+ */
+const presetButtonProps = {
+  size: 'xs',
+  h: '26px',
+  width: '100%',
+  fontSize: 'xs',
+  colorScheme: 'gray',
+  variant: 'solid',
+  color: 'gray.700',
+  fontWeight: 'normal',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+} as const

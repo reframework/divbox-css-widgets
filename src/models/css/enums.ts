@@ -13,6 +13,10 @@ export enum LengthUnit {
   SVH = 'svh',
 }
 
+export enum FractionUnit {
+  FR = 'fr',
+}
+
 export enum SizeLiteral {
   MAX_CONTENT = 'max-content',
   MIN_CONTENT = 'min-content',
