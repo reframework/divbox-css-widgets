@@ -16,7 +16,7 @@ export const RadioButton = styled(Radio.Button)`
   }
   &:hover {
     color: var(--chakra-colors-gray-900);
-    background: var(--chakra-colors-gray-200);
+    background: var(--chakra-colors-gray-300);
   }
   &.ant-radio-button-wrapper {
     padding-inline: 4px;

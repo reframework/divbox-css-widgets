@@ -4,6 +4,7 @@ import { Layout } from '@src/components/Layout'
 import { Size } from '@src/components/Size'
 import { Spacing } from '@src/components/Spacing'
 import { WIDGET_WIDTH } from '@src/constants/styles'
+import { Typography } from '@src/components/Typography'
 
 export const Widget = () => {
   return (
@@ -17,6 +18,9 @@ export const Widget = () => {
         </AccordionItem>
         <AccordionItem title={'Size'}>
           <Size />
+        </AccordionItem>
+        <AccordionItem title={'Typography'}>
+          <Typography />
         </AccordionItem>
       </Accordion>
     </Box>

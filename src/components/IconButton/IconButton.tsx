@@ -8,9 +8,9 @@ interface Props extends Omit<IconButtonProps, 'aria-label'> {
 export const IconButton: React.FC<Props> = ({ ariaLabel, ...props }) => {
   return (
     <ChakraIconButton
-      backgroundColor={'gray.300'}
+      backgroundColor={'gray.200'}
       height={7}
-      minWidth={'24px'}
+      minWidth={6}
       aria-label={ariaLabel}
       {...props}
     />

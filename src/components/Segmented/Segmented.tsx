@@ -3,7 +3,7 @@ import { CheckboxOptionType, Dropdown, MenuProps } from 'antd'
 import { IoIosArrowDown } from 'react-icons/io'
 import { RadioChangeEvent } from 'antd/es/radio/interface'
 import { RadioButton, RadioGroup } from '@src/components/Segmented/Segmented.styles'
-import { toMakeUpperFirstChar } from '@src/helpers'
+import { findSelectItem, toMakeUpperFirstChar } from '@src/helpers'
 import { Box, IconButton } from '@chakra-ui/react'
 import { ItemType } from 'antd/es/menu/interface'
 
@@ -35,26 +35,14 @@ export const Segmented: React.FC<Props> = ({
 
   const [addOptsValue, setAddOptsValue] = useState<ItemType | undefined>()
 
-  const findAddOptsItem = (key: string) => {
-    let result
-    ;(additionalOptions || [])?.forEach((item: any) => {
-      if (item?.children?.length) {
-        const value = item.children.find((val) => val.key === key)
-        if (value) {
-          result = value
-        }
-      } else {
-        if (item.key === key) {
-          result = item
-        }
-      }
-    })
-    return result
-  }
-
   useEffect(() => {
     if (addOptsDefaultValue) {
-      setAddOptsValue(findAddOptsItem(String(addOptsDefaultValue)))
+      setAddOptsValue(
+        findSelectItem({
+          key: String(addOptsDefaultValue),
+          options: additionalOptions,
+        }),
+      )
       return
     }
     if (!defaultValue) {
@@ -63,7 +51,10 @@ export const Segmented: React.FC<Props> = ({
       setAddOptsValue(res)
       return
     }
-    const item = findAddOptsItem(String(defaultValue))
+    const item = findSelectItem({
+      key: String(defaultValue),
+      options: additionalOptions,
+    })
     if (item) {
       setIsChangedAddOptSelect(true)
       setAddOptsValue(item)
@@ -81,7 +72,10 @@ export const Segmented: React.FC<Props> = ({
   }
   const onSelect = ({ key }: any) => {
     setValue(key)
-    const item = findAddOptsItem(String(key))
+    const item = findSelectItem({
+      key: String(key),
+      options: additionalOptions,
+    })
     setAddOptsValue(item)
     setIsChangedAddOptSelect(true)
     onChange?.(key)
@@ -134,6 +128,7 @@ export const Segmented: React.FC<Props> = ({
             menu={{
               items: additionalOptions,
               selectable: true,
+              selectedKeys: [addOptsValue?.key],
               defaultSelectedKeys: [addOptsValue?.key],
               onSelect,
               ...menuProps,
@@ -143,7 +138,7 @@ export const Segmented: React.FC<Props> = ({
               aria-label={'dropdown button'}
               style={{
                 ...(isChangedAddOptSelect && {
-                  background: 'var(--chakra-colors-gray-300)',
+                  background: 'var(--chakra-colors-gray-200)',
                 }),
               }}
               bg={'transparent'}
