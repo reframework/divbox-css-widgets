@@ -1,154 +1,166 @@
 import { IoIosArrowRoundDown, IoIosArrowRoundForward } from 'react-icons/io'
-import { HiMiniBarsArrowDown } from 'react-icons/hi2'
+import { HiMiniBarsArrowDown, HiMiniBarsArrowUp } from 'react-icons/hi2'
 import { Box } from '@chakra-ui/react'
 import { toMakeUpperFirstChar } from '@src/helpers'
 import { Css } from '@src/models/css'
+import { ReactNode } from 'react'
+import { ISegmentedMenuItem } from '@src/components/Segmented'
 
 export const FLEX_DIRECTION_MAIN_OPTIONS = [
   {
-    value: Css.Enum.FlexDirection.ROW,
+    key: Css.Enum.FlexDirection.ROW,
     label: <IoIosArrowRoundForward fontSize={'18px'} />,
   },
   {
-    value: Css.Enum.FlexDirection.COLUMN,
+    key: Css.Enum.FlexDirection.COLUMN,
     label: <IoIosArrowRoundDown fontSize={'18px'} />,
   },
 ]
 
-export const FLEX_DISPLAY_MAIN_OPTIONS = [
+export const DISPLAY_MAIN_OPTIONS = [
   {
-    value: Css.Enum.Display.BLOCK,
+    key: Css.Enum.Display.BLOCK,
     label: toMakeUpperFirstChar(Css.Enum.Display.BLOCK),
   },
   {
-    value: Css.Enum.Display.FLEX,
+    key: Css.Enum.Display.FLEX,
     label: toMakeUpperFirstChar(Css.Enum.Display.FLEX),
   },
   {
-    value: Css.Enum.Display.GRID,
+    key: Css.Enum.Display.GRID,
     label: toMakeUpperFirstChar(Css.Enum.Display.GRID),
   },
 ]
 
-export const FLEX_DISPLAY_ADD_OPTIONS = [
+export const DISPLAY_ADD_OPTIONS: ISegmentedMenuItem[] = [
   {
     key: Css.Enum.Display.INLINE_BLOCK,
     label: toMakeUpperFirstChar(Css.Enum.Display.INLINE_BLOCK),
-    label_prop: 'Inl-blk',
+    buttonLabel: 'In-blk',
   },
   {
     key: Css.Enum.Display.INLINE_FLEX,
     label: toMakeUpperFirstChar(Css.Enum.Display.INLINE_FLEX),
-    label_prop: 'Inl-flx',
+    buttonLabel: 'In-flx',
   },
   {
     key: Css.Enum.Display.INLINE_GRID,
     label: toMakeUpperFirstChar(Css.Enum.Display.INLINE_GRID),
-    label_prop: 'Inl-grd',
+    buttonLabel: 'In-grd',
   },
   {
     key: Css.Enum.Display.INLINE,
     label: toMakeUpperFirstChar(Css.Enum.Display.INLINE),
-    label_prop: 'Inln',
+    buttonLabel: 'Inline',
   },
   { type: 'divider' },
   {
     key: Css.Enum.Display.NONE,
     label: toMakeUpperFirstChar(Css.Enum.Display.NONE),
-    label_prop: 'None',
+    buttonLabel: 'None',
   },
 ]
 
-const AddOptsLabelWrapper: React.FC = ({ children }) => (
+const LabelWrapper = ({ children }: { children: ReactNode }) => (
   <Box fontSize={'12px'} display={'flex'} alignItems={'center'} gap={'5px'}>
     {children}
   </Box>
 )
-const AddOptsGroupLabelWrapper: React.FC = ({ children }) => (
+const GroupLabelWrapper = ({ children }: { children: ReactNode }) => (
   <Box fontSize={'12px'} fontWeight={'bold'}>
     {children}
   </Box>
 )
-export const FLEX_DIRECTION_ADD_OPTIONS = [
+export const FLEX_DIRECTION_ADD_OPTIONS: ISegmentedMenuItem[] = [
   {
     key: 'group1',
-    label: <AddOptsGroupLabelWrapper>Left to right</AddOptsGroupLabelWrapper>,
+    label: <GroupLabelWrapper>Left to right</GroupLabelWrapper>,
     type: 'group',
     children: [
       {
-        label: <AddOptsLabelWrapper>Wrap down</AddOptsLabelWrapper>,
+        label: <LabelWrapper>Wrap down</LabelWrapper>,
         key: '1',
-        icon: <HiMiniBarsArrowDown fontSize={'18px'} />,
+        icon: <HiMiniBarsArrowUp fontSize={'18px'} />,
+        buttonLabel: <HiMiniBarsArrowUp fontSize={'18px'} />,
       },
       {
-        label: <AddOptsLabelWrapper>Wrap up</AddOptsLabelWrapper>,
+        label: <LabelWrapper>Wrap up</LabelWrapper>,
         key: '2',
         icon: <HiMiniBarsArrowDown fontSize={'18px'} />,
+        buttonLabel: <HiMiniBarsArrowDown fontSize={'18px'} />,
       },
     ],
   },
   { type: 'divider' },
   {
-    label: <AddOptsGroupLabelWrapper>Right to left</AddOptsGroupLabelWrapper>,
+    label: <GroupLabelWrapper>Right to left</GroupLabelWrapper>,
     key: 'group2',
     type: 'group',
     children: [
       {
-        label: <AddOptsLabelWrapper>Single row</AddOptsLabelWrapper>,
+        label: <LabelWrapper>Single row</LabelWrapper>,
         key: '3',
-        icon: <HiMiniBarsArrowDown fontSize={'18px'} />,
+        icon: <HiMiniBarsArrowUp fontSize={'18px'} />,
+        buttonLabel: <HiMiniBarsArrowUp fontSize={'18px'} />,
       },
       {
-        label: <AddOptsLabelWrapper>Wrap down</AddOptsLabelWrapper>,
+        label: <LabelWrapper>Wrap down</LabelWrapper>,
         key: '4',
         icon: <HiMiniBarsArrowDown fontSize={'18px'} />,
+        buttonLabel: <HiMiniBarsArrowDown fontSize={'18px'} />,
       },
       {
-        label: <AddOptsLabelWrapper>Wrap up</AddOptsLabelWrapper>,
+        label: <LabelWrapper>Wrap up</LabelWrapper>,
         key: '5',
-        icon: <HiMiniBarsArrowDown fontSize={'18px'} />,
+        icon: <HiMiniBarsArrowUp fontSize={'18px'} />,
+        buttonLabel: <HiMiniBarsArrowUp fontSize={'18px'} />,
       },
     ],
   },
   { type: 'divider' },
   {
-    label: <AddOptsGroupLabelWrapper>Top to bottom</AddOptsGroupLabelWrapper>,
+    label: <GroupLabelWrapper>Top to bottom</GroupLabelWrapper>,
     key: 'group3',
     type: 'group',
     children: [
       {
-        label: <AddOptsLabelWrapper>Wrap right</AddOptsLabelWrapper>,
+        label: <LabelWrapper>Wrap right</LabelWrapper>,
         key: '6',
-        icon: <HiMiniBarsArrowDown fontSize={'18px'} />,
+        icon: <HiMiniBarsArrowUp fontSize={'18px'} />,
+        buttonLabel: <HiMiniBarsArrowUp fontSize={'18px'} />,
       },
       {
-        label: <AddOptsLabelWrapper>Wrap left</AddOptsLabelWrapper>,
+        label: <LabelWrapper>Wrap left</LabelWrapper>,
         key: '7',
         icon: <HiMiniBarsArrowDown fontSize={'18px'} />,
+        buttonLabel: <HiMiniBarsArrowDown fontSize={'18px'} />,
       },
     ],
   },
   { type: 'divider' },
   {
-    label: <AddOptsGroupLabelWrapper>Bottom to top</AddOptsGroupLabelWrapper>,
+    label: <GroupLabelWrapper>Bottom to top</GroupLabelWrapper>,
     key: 'group4',
     type: 'group',
     children: [
       {
-        label: <AddOptsLabelWrapper>Single column</AddOptsLabelWrapper>,
+        label: <LabelWrapper>Single column</LabelWrapper>,
         key: '8',
-        icon: <HiMiniBarsArrowDown fontSize={'18px'} />,
+        icon: <HiMiniBarsArrowUp fontSize={'18px'} />,
+        buttonLabel: <HiMiniBarsArrowUp fontSize={'18px'} />,
       },
       {
-        label: <AddOptsLabelWrapper>Wrap right</AddOptsLabelWrapper>,
+        label: <LabelWrapper>Wrap right</LabelWrapper>,
         key: '9',
         icon: <HiMiniBarsArrowDown fontSize={'18px'} />,
+        buttonLabel: <HiMiniBarsArrowDown fontSize={'18px'} />,
       },
       {
-        label: <AddOptsLabelWrapper>Wrap left</AddOptsLabelWrapper>,
-        icon: <HiMiniBarsArrowDown fontSize={'18px'} />,
+        label: <LabelWrapper>Wrap left</LabelWrapper>,
+        icon: <HiMiniBarsArrowUp fontSize={'18px'} />,
+        buttonLabel: <HiMiniBarsArrowUp fontSize={'18px'} />,
         key: '10',
       },
     ],
   },
-]
+] as const

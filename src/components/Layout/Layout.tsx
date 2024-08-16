@@ -1,8 +1,5 @@
 import { Segmented } from '@src/components/Segmented'
-import {
-  FLEX_DISPLAY_ADD_OPTIONS,
-  FLEX_DISPLAY_MAIN_OPTIONS,
-} from '@src/constants/flex'
+import { DISPLAY_ADD_OPTIONS, DISPLAY_MAIN_OPTIONS } from '@src/constants/flex'
 import { ContentWrapper } from '@src/components/ContentWrapper'
 import { FlexContent } from '@src/components/Layout/FlexContent'
 import { GridContent } from '@src/components/Layout/GridContent'
@@ -14,53 +11,58 @@ export const Layout = () => {
 
   const { layout } = value
 
-  const onDisplayTypeChange = (d: Css.Enum.Display) => {
-    if (Css.Util.isFlex(d) && !layout.flex) {
+  console.log(layout, 'layout')
+
+  const onDisplayTypeChange = (d: string) => {
+    const display = d as Css.Enum.Display
+
+    if (Css.Util.isFlex(display) && !layout.flex) {
+      console.log(display, 'k display')
+
       onChange({
         layout: {
           ...layout,
-          d,
+          d: display,
           flex: Css.Model.Flex(),
         },
       })
       return
     }
 
-    if (Css.Util.isGrid(d) && !layout.grid) {
+    if (Css.Util.isGrid(display) && !layout.grid) {
       onChange({
         layout: {
           ...layout,
-          d,
+          d: display,
           grid: Css.Model.Grid(),
         },
       })
       return
     }
 
-    if (Css.Util.isInline(d) && !layout.vAlign) {
+    if (Css.Util.isInline(display) && !layout.vAlign) {
       onChange({
         layout: {
           ...layout,
-          d,
+          d: display,
           vAlign: Css.Enum.VerticalAlign.BASELINE,
         },
       })
       return
     }
 
-    onChange({ layout: { ...layout, d } })
+    onChange({ layout: { ...layout, d: display } })
   }
 
   return (
     <>
       <ContentWrapper title={'Display'}>
         <Segmented
-          defaultValue={layout.d}
-          addOptsDefaultValue={Css.Enum.Display.NONE}
-          mainDefaultOptions={FLEX_DISPLAY_MAIN_OPTIONS}
-          additionalOptions={FLEX_DISPLAY_ADD_OPTIONS}
+          value={layout.d}
+          options={DISPLAY_MAIN_OPTIONS}
+          menuItems={DISPLAY_ADD_OPTIONS}
           onChange={onDisplayTypeChange}
-          additionalOptionLabelProp={'label_prop'}
+          defaultSelectedKey={Css.Enum.Display.NONE}
         />
       </ContentWrapper>
       {Css.Util.isFlex(layout.d) && layout.flex && (

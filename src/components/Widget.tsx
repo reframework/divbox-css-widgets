@@ -3,13 +3,11 @@ import { AccordionItem } from '@src/components/AccordionItem'
 import { Layout } from '@src/components/Layout'
 import { Size } from '@src/components/Size'
 import { Spacing } from '@src/components/Spacing'
-import { WIDGET_WIDTH } from '@src/constants/styles'
 import { Typography } from '@src/components/Typography'
 
 export const Widget = () => {
   return (
-    <Box maxW={WIDGET_WIDTH} fontSize={'xs'} bg={'gray.50'} pr={'0.5'} pl={'0.5'}>
-      <Accordion defaultIndex={[0]} allowMultiple>
+    <Accordion defaultIndex={[0, 1, 2, 3, 4, 5]} allowMultiple>
         <AccordionItem title={'Layout'}>
           <Layout />
         </AccordionItem>
@@ -23,6 +21,5 @@ export const Widget = () => {
           <Typography />
         </AccordionItem>
       </Accordion>
-    </Box>
   )
 }

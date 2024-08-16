@@ -13,23 +13,27 @@ interface Props extends PropsWithChildren {
 
 export const AccordionItem: React.FC<Props> = ({ title, children }) => {
   return (
-    <ChakraAccordionItem>
-      <h2>
-        <AccordionButton>
-          <Text
-            as="span"
-            flex="1"
-            textAlign="left"
-            fontWeight={600}
-            color={'gray.900'}
-            fontSize={'sm'}
-          >
-            {title}
-          </Text>
-          <AccordionIcon />
-        </AccordionButton>
-      </h2>
-      <AccordionPanel p={1} pb={4}>
+    <ChakraAccordionItem w="100%">
+      <AccordionButton
+        w="100%"
+        bg="transparent"
+        _hover={{ bg: 'transparent' }}
+        px="2"
+      >
+        <Text
+          as="span"
+          flex="1"
+          textAlign="left"
+          fontWeight={600}
+          color={'gray.900'}
+          fontSize={'sm'}
+        >
+          {title}
+        </Text>
+        <AccordionIcon />
+      </AccordionButton>
+
+      <AccordionPanel pt="0.5" px="2" pb="2">
         {children}
       </AccordionPanel>
     </ChakraAccordionItem>

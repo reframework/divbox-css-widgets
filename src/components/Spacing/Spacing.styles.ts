@@ -41,6 +41,7 @@ export const styles = {
     transform: translate(-50%, -50%);
     height: 74px;
     border-radius: var(--chakra-radii-base);
+    overflow: hidden;
     border: 1px solid var(--chakra-colors-gray-300);
     width: calc(147 / 248 * 100%);
     z-index: 1;
@@ -151,8 +152,8 @@ export const styles = {
     top: 0;
     left: var(--chakra-space-0-5);
     font-weight: 200;
-    color: var(--chakra-colors-gray-500);
-    font-size: var(--fontSizes-xxxs);
+    color: var(--chakra-colors-gray-600);
+    font-size: 0.7rem;
     font-style: italic;
     z-index: var(--chakra-zIndices-docked);
   `,

@@ -16,10 +16,11 @@ export const FlexContent = ({ model }: IFlexContentProps) => {
     <>
       <ContentWrapper title={'Direction'}>
         <Segmented
-          defaultValue={model.direction}
-          mainDefaultOptions={FLEX_DIRECTION_MAIN_OPTIONS}
-          additionalOptions={FLEX_DIRECTION_ADD_OPTIONS}
-          additionalOptionLabelProp={'icon'}
+          value={model.direction}
+          onChange={(value) => {}}
+          options={FLEX_DIRECTION_MAIN_OPTIONS}
+          menuItems={FLEX_DIRECTION_ADD_OPTIONS}
+          defaultSelectedKey={'1'}
         />
       </ContentWrapper>
       <ContentWrapper title={'Gap'}>

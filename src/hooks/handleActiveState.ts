@@ -11,6 +11,7 @@ export const HandleActiveState = ({ defaultValue }: HandleActiveStateProps) => {
     },
     [setIsActive],
   )
+
   const toggleActive = useCallback(() => {
     setIsActive((prev) => !prev)
   }, [setIsActive])
