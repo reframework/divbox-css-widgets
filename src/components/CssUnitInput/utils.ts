@@ -65,7 +65,7 @@ export const getRawValue = (value: ICssUnitValue): string => {
     return `${value.v}`
   }
 
-  throw new Error('CssUnitInputError: Unexpected value')
+  throw new Error(`CssUnitInputError: Unexpected value ${value}`)
 }
 
 export const getRawSliderValue = (value: ICssUnitValue): number | null => {
@@ -85,7 +85,7 @@ export const getRawSliderValue = (value: ICssUnitValue): number | null => {
     return value.v
   }
 
-  throw new Error('CssUnitInputError: Unexpected value')
+  throw new Error(`CssUnitInputError: Unexpected value ${value}`)
 }
 
 export const getRawUnitType = (value: ICssUnitValue): ISelectUnitType | null => {
@@ -105,7 +105,7 @@ export const getRawUnitType = (value: ICssUnitValue): ISelectUnitType | null => 
     return value.u
   }
 
-  throw new Error('CssUnitInputError: Unexpected value')
+  throw new Error(`CssUnitInputError: Unexpected value ${value}`)
 }
 
 export const getCssUnitValue = (props: {
@@ -117,7 +117,7 @@ export const getCssUnitValue = (props: {
   const { value, unit, hasAuto, hasFr } = props
 
   if (hasAuto && Css.Util.isAuto(value)) {
-    return unit
+    return value
   }
 
   const numericValue = parseFloat(value as string)
@@ -137,7 +137,6 @@ export const getCssUnitValue = (props: {
   }
 
   const match = value.match(lengthPattern)
-  console.log('match', match)
   if (match?.[1]) {
     return Css.Model.Length({
       v: numericValue,

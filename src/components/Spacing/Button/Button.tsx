@@ -81,7 +81,11 @@ export const SpacingValueButton: React.FC<Props> = ({
 const renderUnitType = (value: ICssUnitValue) => {
   const unitType = CssUnit.Util.getRawUnitType(value)
 
-  if (!unitType || unitType === Css.Enum.LengthUnit.PX) {
+  if (
+    !unitType ||
+    unitType === Css.Enum.LengthUnit.PX ||
+    unitType === Css.Enum.LengthLiteral.AUTO
+  ) {
     return ''
   }
 
@@ -90,14 +94,11 @@ const renderUnitType = (value: ICssUnitValue) => {
 
 const buttonProps = {
   size: 'xs',
-  fontSize: 'xs',
   colorScheme: 'gray',
   variant: 'ghost',
   color: 'gray.500',
-  fontWeight: 'normal',
   _hover: { bg: 'transparent' },
   _active: { bg: 'transparent' },
-  textOverflow: 'ellipsis',
   overflow: 'hidden',
   whiteSpace: 'nowrap',
   w: '100%',

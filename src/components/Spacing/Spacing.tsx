@@ -54,7 +54,7 @@ export const Spacing = () => {
           isMargin
           value={internalValue.margin.l}
           onChange={onChangeMargin}
-          property={'l'}
+          property={'t'}
         />
       </Box>
       <Box css={styles.box2}>
@@ -63,7 +63,7 @@ export const Spacing = () => {
           isMargin
           value={internalValue.margin.t}
           onChange={onChangeMargin}
-          property={'t'}
+          property={'l'}
         />
       </Box>
       <Box css={styles.box3}>
@@ -73,7 +73,7 @@ export const Spacing = () => {
             presets={PADDING_PRESETS}
             value={internalValue.padding.l}
             onChange={onChangePadding}
-            property={'l'}
+            property={'t'}
           />
         </Box>
         <Box css={styles.box3_2}>
@@ -81,7 +81,7 @@ export const Spacing = () => {
             presets={PADDING_PRESETS}
             value={internalValue.padding.t}
             onChange={onChangePadding}
-            property={'t'}
+            property={'l'}
           />
         </Box>
         <Box css={styles.box3_3}></Box>

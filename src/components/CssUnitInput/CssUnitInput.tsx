@@ -1,7 +1,6 @@
 import { Input, InputProps, Select, SelectProps } from 'antd'
 import { useEffect, useMemo, useState } from 'react'
 import { Css } from '@src/models/css'
-import { capitalize } from 'lodash'
 import { inputStyle } from '@src/components/CssUnitInput/styles'
 import {
   getInputPlaceholder,
@@ -23,18 +22,18 @@ const unitOptions = {
   default: lengthUnits.map((value) => {
     return {
       value: value,
-      label: capitalize(value),
+      label: value.toUpperCase(),
       labelForInput: value,
     }
   }) as IUnitSelectOption[],
   auto: {
     value: Css.Enum.LengthLiteral.AUTO,
-    label: 'Auto',
+    label: 'AUTO',
     labelForInput: '-',
   } as IUnitSelectOption,
   fr: {
     value: Css.Enum.FractionUnit.FR,
-    label: 'Fr',
+    label: 'FR',
     labelForInput: Css.Enum.FractionUnit.FR,
   } as IUnitSelectOption,
 }
@@ -126,6 +125,7 @@ export const CssUnitInput: React.FC<ICssUnitInputProps> = ({
         padding: 'var(--chakra-space-1)',
       }}
       placement={'bottomRight'}
+      listHeight={500}
     />
   )
 
@@ -133,6 +133,7 @@ export const CssUnitInput: React.FC<ICssUnitInputProps> = ({
     <Input
       {...props}
       css={inputStyle}
+      autoFocus
       value={value}
       onChange={onChangeValue}
       addonAfter={selectAfter}
