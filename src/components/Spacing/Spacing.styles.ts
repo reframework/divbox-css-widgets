@@ -41,6 +41,7 @@ export const styles = {
     transform: translate(-50%, -50%);
     height: 74px;
     border-radius: var(--chakra-radii-base);
+    overflow: hidden;
     border: 1px solid var(--chakra-colors-gray-300);
     width: calc(147 / 248 * 100%);
     z-index: 1;

@@ -52,7 +52,15 @@ export const Spacing = () => {
   )
 
   return (
-    <Grid height={'124px'} width={'100%'} position={'relative'}>
+    <Grid
+      border="1px"
+      borderColor="gray.300"
+      borderRadius="base"
+      overflow="hidden"
+      height={'124px'}
+      width={'100%'}
+      position={'relative'}
+    >
       <Box css={styles.label}>Margin</Box>
       <Box css={styles.box1}>
         <SpacingValueButton
