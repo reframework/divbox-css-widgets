@@ -60,9 +60,10 @@ export const Spacing = () => {
       height={'124px'}
       width={'100%'}
       position={'relative'}
+      bgColor={'gray.200'}
     >
       <Box css={styles.label}>Margin</Box>
-      <Box css={styles.box1}>
+      <Box css={styles.boxMt}>
         <SpacingValueButton
           presets={MARGIN_PRESETS}
           isMargin
@@ -141,7 +142,7 @@ export const Spacing = () => {
           align={{ offset: [0, -45] }}
         />
       </Box>
-      <Box css={styles.box5}>
+      <Box css={styles.boxMb}>
         <SpacingValueButton
           presets={MARGIN_PRESETS}
           isMargin

@@ -7,13 +7,13 @@ const centerStyles = css`
 `
 
 export const styles = {
-  box1: css`
+  boxMt: css`
     ${centerStyles};
     position: absolute;
     top: 0;
     width: 100%;
     clip-path: polygon(0% 0%, 100% 0%, 80% 100%, 20% 100%);
-    height: 26px;
+    height: 24px;
     background: var(--chakra-colors-gray-100);
     &:hover {
       background: var(--chakra-colors-gray-200);
@@ -28,7 +28,7 @@ export const styles = {
     width: calc(51 / 248 * 100%);
     height: 100%;
     background: var(--chakra-colors-gray-100);
-    z-index: 2;
+    z-index: 1;
     &:hover {
       background: var(--chakra-colors-gray-200);
     }
@@ -61,12 +61,12 @@ export const styles = {
       background: var(--chakra-colors-gray-300);
     }
   `,
-  box5: css`
+  boxMb: css`
     ${centerStyles};
     position: absolute;
     bottom: 0;
     clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
-    height: 26px;
+    height: 24px;
     width: 100%;
     background: var(--chakra-colors-gray-200);
     &:hover {
