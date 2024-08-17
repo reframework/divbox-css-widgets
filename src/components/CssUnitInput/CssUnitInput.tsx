@@ -133,9 +133,7 @@ export const CssUnitInput: React.FC<ICssUnitInputProps> = ({
       optionLabelProp={'labelForInput'}
       options={options}
       suffixIcon={null}
-      dropdownStyle={{
-        width: '60px',
-      }}
+      dropdownStyle={{ width: 72 }}
       placement={'bottomRight'}
       listHeight={500}
     />

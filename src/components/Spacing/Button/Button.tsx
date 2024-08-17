@@ -125,7 +125,7 @@ const textProps = {
   p: '2px',
   w: 'min-content',
   h:'16px',
-  lineHeight: '10px',
+  lineHeight: '12px',
   borderRadius: 'sm',
 } as const
 
