@@ -99,7 +99,7 @@ export const CssUnitInput: React.FC<ICssUnitInputProps> = ({
     if (unitValue === Css.Enum.LengthLiteral.AUTO) {
       setValue(unitValue)
     } else {
-      if (typeof value !== 'number') {
+      if (Css.Util.isAuto(value)) {
         setValue('')
       }
     }
