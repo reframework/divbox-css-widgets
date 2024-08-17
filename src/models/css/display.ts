@@ -6,7 +6,7 @@ export type ILayout = {
   /**
    * Display property is required.
    */
-  d: Display
+  d: Display | null
   /**
    * Flex settings
    * Null if user didn't set the value.
@@ -27,7 +27,7 @@ export type ILayout = {
 
 export const LayoutModel = (props?: Partial<ILayout>): ILayout => {
   return {
-    d: props?.d || Display.BLOCK,
+    d: props?.d || null,
     flex: props?.flex || null,
     grid: props?.grid || null,
     vAlign: props?.vAlign || null,

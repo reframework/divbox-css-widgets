@@ -5,60 +5,75 @@ import { FlexContent } from '@src/components/Layout/FlexContent'
 import { GridContent } from '@src/components/Layout/GridContent'
 import { useProps } from '@src/components/Context'
 import { Css } from '@src/models/css'
+import { useCallback } from 'react'
 
 export const Layout = () => {
   const { value, onChange } = useProps()
 
   const { layout } = value
+  const isDisplayEmpty = Css.Util.isEmptyValue(layout.d)
 
-  console.log(layout, 'layout')
+  const onDisplayTypeChange = useCallback(
+    (d: Css.Enum.Display | null) => {
+      if (!d) {
+        onChange({ layout: { ...layout, d: null } })
+        return
+      }
 
-  const onDisplayTypeChange = (d: string) => {
-    const display = d as Css.Enum.Display
+      if (Css.Util.isFlex(d) && !layout.flex) {
+        onChange({
+          layout: {
+            ...layout,
+            d: d,
+            flex: Css.Model.Flex(),
+          },
+        })
+        return
+      }
 
-    if (Css.Util.isFlex(display) && !layout.flex) {
-      console.log(display, 'k display')
+      if (Css.Util.isGrid(d) && !layout.grid) {
+        onChange({
+          layout: {
+            ...layout,
+            d: d,
+            grid: Css.Model.Grid(),
+          },
+        })
+        return
+      }
 
-      onChange({
-        layout: {
-          ...layout,
-          d: display,
-          flex: Css.Model.Flex(),
-        },
-      })
-      return
-    }
+      onChange({ layout: { ...layout, d } })
+    },
+    [layout, onChange],
+  )
 
-    if (Css.Util.isGrid(display) && !layout.grid) {
-      onChange({
-        layout: {
-          ...layout,
-          d: display,
-          grid: Css.Model.Grid(),
-        },
-      })
-      return
-    }
+  const onChangeFlex = useCallback(
+    (flex: Css.IFlex) => {
+      onChange({ layout: { ...layout, flex } })
+    },
+    [layout, onChange],
+  )
 
-    if (Css.Util.isInline(display) && !layout.vAlign) {
-      onChange({
-        layout: {
-          ...layout,
-          d: display,
-          vAlign: Css.Enum.VerticalAlign.BASELINE,
-        },
-      })
-      return
-    }
+  const onChangeGrid = useCallback(
+    (grid: Css.IGrid) => {
+      onChange({ layout: { ...layout, grid } })
+    },
+    [layout, onChange],
+  )
 
-    onChange({ layout: { ...layout, d: display } })
+  const resetDisplay = () => {
+    onDisplayTypeChange(null)
   }
 
   return (
     <>
-      <ContentWrapper title={'Display'}>
+      <ContentWrapper
+        property="display"
+        isActive={!isDisplayEmpty}
+        onReset={!isDisplayEmpty ? resetDisplay : null}
+      >
         <Segmented
-          value={layout.d}
+          value={layout.d || Css.DefaultValue.DISPLAY}
           options={DISPLAY_MAIN_OPTIONS}
           menuItems={DISPLAY_ADD_OPTIONS}
           onChange={onDisplayTypeChange}
@@ -66,10 +81,10 @@ export const Layout = () => {
         />
       </ContentWrapper>
       {Css.Util.isFlex(layout.d) && layout.flex && (
-        <FlexContent model={layout.flex} />
+        <FlexContent model={layout.flex} onChange={onChangeFlex} />
       )}
       {Css.Util.isGrid(layout.d) && layout.grid && (
-        <GridContent model={layout.grid} />
+        <GridContent model={layout.grid} onChange={onChangeGrid} />
       )}
       {/* TODO: inline layout with vertical align */}
     </>

@@ -11,6 +11,12 @@ interface Props {
   handleRowsInputChange?: (val: number) => void
 }
 
+/**
+ * TODO: change this component to CssGapSlider
+ *
+ * value: Css.IGap
+ * onChange: (value: Css.IGap) => void
+ */
 export const Slider: React.FC<Props> = ({
   handleChange,
   handleRowsInputChange,
