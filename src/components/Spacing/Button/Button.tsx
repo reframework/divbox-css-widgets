@@ -97,9 +97,10 @@ const renderUnitType = (value: ICssUnitValue) => {
 }
 
 const buttonProps = {
-  size: 'xs',
-  colorScheme: 'gray',
-  variant: 'ghost',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  variant: 'unstyled',
   color: 'gray.500',
   _hover: { bg: 'transparent' },
   _active: { bg: 'transparent' },
@@ -111,7 +112,8 @@ const buttonProps = {
 } as const
 
 const textProps = {
-  size: 'xs',
+  as: 'span',
+  display: 'inline-block',
   fontSize: 'xs',
   colorScheme: 'gray',
   variant: 'ghost',
@@ -122,6 +124,8 @@ const textProps = {
   whiteSpace: 'nowrap',
   p: '2px',
   w: 'min-content',
+  h:'16px',
+  lineHeight: '10px',
   borderRadius: 'sm',
 } as const
 
