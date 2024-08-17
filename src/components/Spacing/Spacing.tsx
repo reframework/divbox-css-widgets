@@ -78,6 +78,8 @@ export const Spacing = () => {
           value={internalValue.margin.l}
           onChange={onChangeMargin}
           property={'l'}
+          placement="bottomLeft"
+          align={{ offset: [0, -45] }}
         />
       </Box>
       <Box css={styles.box3}>
@@ -96,6 +98,12 @@ export const Spacing = () => {
             value={internalValue.padding.l}
             onChange={onChangePadding}
             property={'l'}
+            placement="bottomLeft"
+            align={{
+              offset: [0, -19],
+              targetOffset: [50, 0],
+              overflow: { adjustX: false },
+            }}
           />
         </Box>
         <Box css={styles.box3_3}></Box>
@@ -105,6 +113,12 @@ export const Spacing = () => {
             value={internalValue.padding.r}
             onChange={onChangePadding}
             property={'r'}
+            placement="bottomRight"
+            align={{
+              offset: [0, -19],
+              targetOffset: [-50, 0],
+              overflow: { adjustX: false },
+            }}
           />
         </Box>
         <Box css={styles.box3_5}>
@@ -123,6 +137,8 @@ export const Spacing = () => {
           value={internalValue.margin.r}
           onChange={onChangeMargin}
           property={'r'}
+          placement="bottomRight"
+          align={{ offset: [0, -45] }}
         />
       </Box>
       <Box css={styles.box5}>
