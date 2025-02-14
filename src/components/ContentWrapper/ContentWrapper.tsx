@@ -1,37 +1,26 @@
-import { Flex, Grid, GridProps } from '@chakra-ui/react'
-import { PropsWithChildren } from 'react'
+import { Flex, Grid } from '@chakra-ui/react'
+import { ReactNode } from 'react'
 import { LABEL_WIDTH } from '@src/constants/styles'
+import {
+  CssPropertyLabel,
+  ICssPropertyLabelProps,
+} from '@src/components/CssPropertyLabel/CssPropertyLabel'
 
-interface Props extends PropsWithChildren {
-  title: string
-  isActive?: boolean
-  containerProps?: GridProps
+interface Props extends ICssPropertyLabelProps {
+  children: ReactNode
 }
 
-export const ContentWrapper: React.FC<Props> = ({
-  title,
-  children,
-  isActive,
-  containerProps,
-}) => {
+export const ContentWrapper: React.FC<Props> = ({ children, ...labelProps }) => {
   return (
-    <Grid
-      templateColumns={`${LABEL_WIDTH} 1fr`}
-      boxSizing={'border-box'}
-      mb="2"
-      {...containerProps}
-    >
+    <Grid templateColumns={`${LABEL_WIDTH} 1fr`} boxSizing={'border-box'} mb="2">
       <Flex
         textOverflow={'ellipsis'}
         overflow={'hidden'}
         whiteSpace={'nowrap'}
         alignItems={'center'}
-        color={isActive ? 'blue.500' : 'gray.700'}
-        bg={isActive ? 'blue.50' : 'transparent'}
         h="26px"
-        fontSize={'xs'}
       >
-        {title}
+        <CssPropertyLabel {...labelProps} />
       </Flex>
 
       {children}

@@ -1,9 +1,8 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { Button, Center, Text } from '@chakra-ui/react'
-import { Popover } from 'antd'
-import { HandleActiveState } from '@src/hooks/handleActiveState'
+import { Popover, TooltipProps } from 'antd'
 import { PopoverContent } from '@src/components/Spacing/PopoverContent'
-import { WIDGET_INNER_WIDTH, WIDGET_WIDTH } from '@src/constants/styles'
+import { WIDGET_INNER_WIDTH } from '@src/constants/styles'
 import { Css } from '@src/models/css'
 import { ICssUnitValue } from '@src/components/CssUnitInput/utils'
 import { CssUnit } from '@src/components/CssUnitInput'
@@ -14,6 +13,8 @@ interface Props {
   onChange: (value: ICssUnitValue, property: keyof Css.IMargin) => void
   isMargin?: boolean
   property: keyof Css.IMargin
+  placement?: TooltipProps['placement']
+  align?: TooltipProps['align']
 }
 
 export const SpacingValueButton: React.FC<Props> = ({
@@ -22,6 +23,8 @@ export const SpacingValueButton: React.FC<Props> = ({
   isMargin,
   onChange: onChangeProp,
   property,
+  align,
+  placement = 'bottom',
 }) => {
   const [isOpened, setIsOpened] = useState(false)
 
@@ -51,6 +54,7 @@ export const SpacingValueButton: React.FC<Props> = ({
       open={isOpened}
       onOpenChange={setIsOpened}
       destroyTooltipOnHide
+      align={align}
       content={
         <PopoverContent
           value={value}
@@ -63,7 +67,7 @@ export const SpacingValueButton: React.FC<Props> = ({
       }
       trigger="click"
       arrow={false}
-      placement={'bottom'}
+      placement={placement}
       overlayInnerStyle={{ maxWidth: WIDGET_INNER_WIDTH }}
     >
       <Center w="100%" h="100%">
@@ -93,9 +97,10 @@ const renderUnitType = (value: ICssUnitValue) => {
 }
 
 const buttonProps = {
-  size: 'xs',
-  colorScheme: 'gray',
-  variant: 'ghost',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  variant: 'unstyled',
   color: 'gray.500',
   _hover: { bg: 'transparent' },
   _active: { bg: 'transparent' },
@@ -107,7 +112,8 @@ const buttonProps = {
 } as const
 
 const textProps = {
-  size: 'xs',
+  as: 'span',
+  display: 'inline-block',
   fontSize: 'xs',
   colorScheme: 'gray',
   variant: 'ghost',
@@ -118,6 +124,8 @@ const textProps = {
   whiteSpace: 'nowrap',
   p: '2px',
   w: 'min-content',
+  h:'16px',
+  lineHeight: '12px',
   borderRadius: 'sm',
 } as const
 

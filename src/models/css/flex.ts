@@ -14,19 +14,19 @@ import { GapModel, IGap } from '@src/models/css/gap'
  */
 export type IFlex = {
   /** Aligns flex items along the cross axis. Default is 'stretch'. */
-  alignItems: StartCenterEnd | StretchBaseline
+  alignItems: StartCenterEnd | StretchBaseline | null
 
   /** Controls the distribution of space between flex items. */
-  justifyContent: StartCenterEnd | BetweenAround
+  justifyContent: StartCenterEnd | BetweenAround | null
 
   /** Defines the direction of flex items in the container. */
-  direction: FlexDirection
+  direction: FlexDirection | null
 
   /** Defines whether flex items are forced into a single line or can wrap onto multiple lines. */
-  wrap: FlexWrap
+  wrap: FlexWrap | null
 
   /** Specifies the gap size between flex items. */
-  gap: IGap
+  gap: IGap | null
 
   /** Controls the distribution of space between flex lines. Default is null. */
   alignContent: StartCenterEnd | BetweenAround | null
@@ -34,11 +34,11 @@ export type IFlex = {
 
 export const FlexModel = (props?: Partial<IFlex>): IFlex => {
   return {
-    alignItems: props?.alignItems || StretchBaseline.STRETCH,
-    justifyContent: props?.justifyContent || StartCenterEnd.START,
-    direction: props?.direction || FlexDirection.ROW,
-    wrap: props?.wrap || FlexWrap.NOWRAP,
-    gap: props?.gap || GapModel(),
+    alignItems: props?.alignItems || null,
+    justifyContent: props?.justifyContent || null,
+    direction: props?.direction || null,
+    wrap: props?.wrap || null,
+    gap: props?.gap || null,
     alignContent: props?.alignContent || null,
   }
 }

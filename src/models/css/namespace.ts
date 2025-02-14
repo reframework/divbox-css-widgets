@@ -127,10 +127,22 @@ const Model = {
   BorderLine: BorderLineModel,
 }
 
+const DefaultValue = {
+  DISPLAY: Enum.Display.BLOCK,
+  VERTICAL_ALIGN: Enum.VerticalAlign.BASELINE,
+  ALIGN_ITEMS: Enum.StretchBaseline.STRETCH,
+  JUSTIFY_CONTENT: Enum.StartCenterEnd.START,
+  FLEX_DIRECTION: Enum.FlexDirection.ROW,
+  FLEX_WRAP: Enum.FlexWrap.NOWRAP,
+  // GAP: props?.gap || GapModel(),
+  ALIGN_CONTENT: Enum.StretchBaseline.STRETCH,
+}
+
 export {
   Enum,
   Model,
   Util,
+  DefaultValue,
   // Types
   IAngle,
   IBackgroundItem,

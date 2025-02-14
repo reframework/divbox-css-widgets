@@ -3,54 +3,53 @@ import { Dropdown } from 'antd'
 import { IoIosArrowDown } from 'react-icons/io'
 import { Button, ButtonGroup, Center, Icon } from '@chakra-ui/react'
 import { Label, LabelProps } from '@src/components/Label'
-import { ICssUnitValue } from '@src/components/CssUnitInput/utils'
 
-export type ISegmentedItem = {
+export type ISegmentedItem<T extends string = string> = {
   label: ReactNode
-  key: string
+  key: T
 }
 
-type SegmentedMenuDefaultItem = {
+type SegmentedMenuDefaultItem<T extends string = string> = {
   label: ReactNode
   buttonLabel: ReactNode
-  key: string
+  key: T
   icon?: ReactNode
 }
 
-type SegmentedMenuGroupItem = {
+type SegmentedMenuGroupItem<T extends string = string> = {
   type: 'group'
   label: ReactNode
   key: string
-  children: SegmentedMenuDefaultItem[]
+  children: SegmentedMenuDefaultItem<T>[]
   icon?: ReactNode
 }
 
-export type ISegmentedMenuItem =
-  | SegmentedMenuDefaultItem
+export type ISegmentedMenuItem<T extends string = string> =
+  | SegmentedMenuDefaultItem<T>
   | { type: 'divider' }
-  | SegmentedMenuGroupItem
+  | SegmentedMenuGroupItem<T>
 
-interface Props {
-  value: ICssUnitValue
-  options: ISegmentedItem[]
-  onChange?: (value: ICssUnitValue) => void
-  menuItems?: ISegmentedMenuItem[]
+interface Props<T extends string> {
+  value: T
+  options: ISegmentedItem<T>[]
+  onChange?: (value: T | null) => void
+  menuItems?: ISegmentedMenuItem<T>[]
   defaultSelectedKey?: string
   labelProps?: LabelProps
 }
 
-export const Segmented: React.FC<Props> = ({
+export const Segmented = <T extends string>({
   options,
   onChange,
   value,
   menuItems,
   defaultSelectedKey,
   labelProps,
-}) => {
+}: Props<T>) => {
   const [selectedKey, setSelectedKey] = React.useState<string | undefined>(
     defaultSelectedKey,
   )
-  const handleChange = (value: string) => {
+  const handleChange = (value: T) => {
     onChange?.(value)
   }
 
@@ -90,7 +89,7 @@ export const Segmented: React.FC<Props> = ({
                 p="1"
                 pr="0"
                 onClick={() => {
-                  handleChange(item.key)
+                  handleChange(item.key as T)
                 }}
               >
                 <Center flexGrow="1">{item.label}</Center>
@@ -129,7 +128,7 @@ export const Segmented: React.FC<Props> = ({
             <Button
               {...buttonProps(value === item.key)}
               onClick={() => {
-                handleChange(item.key)
+                handleChange(item.key as T)
               }}
             >
               {item.label}
@@ -142,7 +141,7 @@ export const Segmented: React.FC<Props> = ({
 }
 
 const buttonProps = (active: boolean) => ({
-  h: '26px',
+  h: 6,
   flexGrow: '1',
   variant: 'ghost',
   bg: active ? 'gray.200' : 'gray.50',
