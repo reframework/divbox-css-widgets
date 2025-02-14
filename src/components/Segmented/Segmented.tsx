@@ -2,6 +2,8 @@ import React, { ReactNode, useMemo } from 'react'
 import { Dropdown } from 'antd'
 import { IoIosArrowDown } from 'react-icons/io'
 import { Button, ButtonGroup, Center, Icon } from '@chakra-ui/react'
+import { Label, LabelProps } from '@src/components/Label'
+import { ICssUnitValue } from '@src/components/CssUnitInput/utils'
 
 export type ISegmentedItem = {
   label: ReactNode
@@ -29,11 +31,12 @@ export type ISegmentedMenuItem =
   | SegmentedMenuGroupItem
 
 interface Props {
-  value: string
+  value: ICssUnitValue
   options: ISegmentedItem[]
-  onChange?: (value: string) => void
+  onChange?: (value: ICssUnitValue) => void
   menuItems?: ISegmentedMenuItem[]
   defaultSelectedKey?: string
+  labelProps?: LabelProps
 }
 
 export const Segmented: React.FC<Props> = ({
@@ -42,11 +45,11 @@ export const Segmented: React.FC<Props> = ({
   value,
   menuItems,
   defaultSelectedKey,
+  labelProps,
 }) => {
   const [selectedKey, setSelectedKey] = React.useState<string | undefined>(
     defaultSelectedKey,
   )
-
   const handleChange = (value: string) => {
     onChange?.(value)
   }
@@ -65,69 +68,76 @@ export const Segmented: React.FC<Props> = ({
   }, [options, menuItems, value, selectedKey, defaultSelectedKey])
 
   return (
-    <ButtonGroup
-      isAttached
-      width="100%"
-      size="xs"
-      overflow="hidden"
-      border="1px solid"
-      borderColor="gray.300"
-      borderRadius="md"
-    >
-      {currentOptions.map((item, idx, { length }) => {
-        const withMenu = idx === length - 1 && menuItems?.length
+    <Label {...labelProps}>
+      <ButtonGroup
+        isAttached
+        width="100%"
+        size="xs"
+        overflow="hidden"
+        border="1px solid"
+        borderColor="gray.300"
+        borderRadius="md"
+      >
+        {currentOptions.map((item, idx, { length }) => {
+          const withMenu = idx === length - 1 && menuItems?.length
 
-        if (withMenu) {
+          if (withMenu) {
+            return (
+              <Button
+                {...buttonProps(value === item.key)}
+                minW="50px"
+                justifyContent="space-between"
+                p="1"
+                pr="0"
+                onClick={() => {
+                  handleChange(item.key)
+                }}
+              >
+                <Center flexGrow="1">{item.label}</Center>
+                <Dropdown
+                  trigger={['click']}
+                  placement={'bottomRight'}
+                  menu={{
+                    items: menuItems,
+                    selectable: true,
+                    selectedKeys: [value],
+                    onSelect,
+                    onClick: ({ domEvent }) => {
+                      domEvent.stopPropagation()
+                    },
+                  }}
+                >
+                  <Center
+                    role="button"
+                    aria-label="More options"
+                    minW="16px"
+                    h="26px"
+                  >
+                    <Icon
+                      as={IoIosArrowDown}
+                      color="gray-700"
+                      size="xs"
+                      aria-label="button"
+                    />
+                  </Center>
+                </Dropdown>
+              </Button>
+            )
+          }
+
           return (
             <Button
               {...buttonProps(value === item.key)}
-              minW="50px"
-              justifyContent="space-between"
-              p="1"
-              pr="0"
               onClick={() => {
                 handleChange(item.key)
               }}
             >
-              <Center flexGrow="1">{item.label}</Center>
-              <Dropdown
-                trigger={['click']}
-                placement={'bottomRight'}
-                menu={{
-                  items: menuItems,
-                  selectable: true,
-                  selectedKeys: [value],
-                  onSelect,
-                  onClick: ({ domEvent }) => {
-                    domEvent.stopPropagation()
-                  },
-                }}
-              >
-                <Center role="button" aria-label="More options" minW="16px" h="26px">
-                  <Icon
-                    as={IoIosArrowDown}
-                    color="gray-700"
-                    size="xs"
-                    aria-label="button"
-                  />
-                </Center>
-              </Dropdown>
+              {item.label}
             </Button>
           )
-        }
-
-        return (
-          <Button
-            {...buttonProps(value === item.key)}
-            onClick={() => {
-              handleChange(item.key)
-            }}
-          >
-            {item.label}
-          </Button>
-        )
-      })}
-    </ButtonGroup>
+        })}
+      </ButtonGroup>
+    </Label>
   )
 }
 

@@ -6,6 +6,7 @@ import {
   LetterSpacingLiteral,
   TextAlign,
   TextDecoration,
+  TextFontStyle,
   TextTransform,
   WhiteSpace,
   WordBreak,
@@ -26,6 +27,7 @@ export type ITypography = {
   a: TextAlign | null // left
   lh: ILineHeight | null // normal
   ls: ILetterSpacing | null // normal
+  fs: TextFontStyle | null // normal
   dec: TextDecoration | null // none
   ttr: TextTransform | null // none
   wbr: WordBreak | null // normal
@@ -49,5 +51,6 @@ export const TypographyModel = (props?: Partial<ITypography>): ITypography => {
     whs: props?.whs || null,
     // dir: props?.dir || null,
     shd: props?.shd || null,
+    fs: props?.fs || TextFontStyle.NORMAL,
   }
 }

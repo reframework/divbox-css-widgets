@@ -45,7 +45,7 @@ export interface ICssUnitInputProps extends Omit<InputProps, 'onChange' | 'value
   value: ICssUnitValue
   onChange: (v: ICssUnitValue) => void
   defaultUnit?: ISelectUnitType
-  onClose: () => void
+  onClose?: () => void
 }
 
 export const CssUnitInput: React.FC<ICssUnitInputProps> = ({
@@ -121,7 +121,7 @@ export const CssUnitInput: React.FC<ICssUnitInputProps> = ({
   const onKeyDown: InputProps['onKeyDown'] = ({ key }) => {
     if (key === 'Enter') {
       submitValue()
-      onClose()
+      onClose?.()
     }
   }
 

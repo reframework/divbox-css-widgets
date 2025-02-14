@@ -1,18 +1,26 @@
 import { Dropdown as AntdDropdown, MenuProps } from 'antd'
-import { Button, Placement } from '@chakra-ui/react'
+import { Button, Divider, Placement } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
-import { ItemType } from 'antd/es/menu/interface'
-import { findSelectItem, toMakeUpperFirstChar } from '@src/helpers'
+import { findSelectItem } from '@src/helpers'
 import { IoIosArrowDown } from 'react-icons/io'
 import styled from '@emotion/styled'
+import _ from 'lodash'
+import { MainItemType } from '@src/types/props'
+import { Label, LabelProps } from '@src/components/Label'
+import { SelectDropdownBox } from '@src/components/Select/SelectDropdownBox'
 
 interface Props {
-  options: ItemType[]
+  options: MainItemType[]
   menuProps?: Omit<MenuProps, 'defaultSelectedKeys'>
   defaultSelectedKey?: string
-  handleSelect?: (value: ItemType) => void
+  handleSelect?: (value?: MainItemType) => void
   placement?: Placement
   optionLabelProp?: string
+  activeItemKeyOnHover?: string
+  activeItemPropertyOnHover?: string
+  setActiveItemOnHover?: (key?: React.Key) => void
+  labelProps?: LabelProps
+  isCapitalizeButtonTitle?: boolean
 }
 
 const Dropdown = styled(AntdDropdown)`
@@ -27,54 +35,102 @@ export const Select: React.FC<Props> = ({
   defaultSelectedKey,
   handleSelect,
   optionLabelProp,
+  activeItemKeyOnHover,
+  activeItemPropertyOnHover,
+  setActiveItemOnHover,
+  labelProps,
+  isCapitalizeButtonTitle = true,
 }) => {
-  const [value, setValue] = useState<ItemType | undefined>()
+  const [value, setValue] = useState<MainItemType | undefined>()
+
+  const contentStyle: React.CSSProperties = {
+    backgroundColor: 'var(--chakra-colors-white)',
+    borderRadius: 'var(--chakra-radii-sm)',
+    boxShadow: 'none',
+  }
   useEffect(() => {
     if (defaultSelectedKey) {
       setValue(findSelectItem({ key: defaultSelectedKey, options }))
+      setActiveItemOnHover?.(defaultSelectedKey)
       return
     }
 
     const defaultValue = (options as any)?.[0]?.children?.[0] || options?.[0]
     setValue(defaultValue)
-  }, [defaultSelectedKey, findSelectItem, options, setValue])
+    setActiveItemOnHover?.(defaultValue.key)
+  }, [])
 
+  useEffect(() => {
+    return () => {
+      setActiveItemOnHover?.(value?.key)
+    }
+  }, [value])
   const onSelect = ({ key }: any) => {
     setValue(key)
     const item = findSelectItem({ key, options })
     setValue(item)
+    setActiveItemOnHover?.(key)
     handleSelect?.(item)
   }
-  return (
-    <Dropdown
-      trigger={['click']}
-      placement={placement}
-      menu={{
-        items: options,
-        defaultSelectedKeys: [defaultSelectedKey],
-        selectedKeys: [value?.key],
-        selectable: true,
-        onSelect,
-        ...menuProps,
-      }}
-    >
-      <Button
-        width={'100%'}
-        height={'var(--spacing-26)'}
-        backgroundColor={'gray.200'}
-        borderColor={'gray.300'}
-        borderWidth={'1px'}
-        fontSize={'xs'}
-        fontWeight={'medium'}
-        color={'gray.900'}
-        display={'flex'}
-        justifyContent={'space-between'}
-        gap={1}
-        colorScheme={'gray'}
+
+  const menuStyle: React.CSSProperties = {
+    boxShadow: 'none',
+  }
+
+  const dropdownRender = (menu) => {
+    return (
+      <div
+        style={contentStyle}
+        onMouseLeave={() => setActiveItemOnHover?.(value?.key)}
       >
-        {toMakeUpperFirstChar(value?.[optionLabelProp || 'label'] || '')}
-        <IoIosArrowDown color={'var(--chakra-colors-gray-900)'} />
-      </Button>
-    </Dropdown>
+        {React.cloneElement(menu, { style: menuStyle })} <Divider />
+        <SelectDropdownBox>
+          {activeItemKeyOnHover &&
+            options?.find((el) => el.key === activeItemKeyOnHover)?.[
+              activeItemPropertyOnHover
+            ]}
+        </SelectDropdownBox>
+      </div>
+    )
+  }
+  const buttonTitle = value?.[optionLabelProp || 'label']
+  return (
+    <Label {...labelProps}>
+      <Dropdown
+        trigger={['click']}
+        placement={placement}
+        dropdownRender={activeItemKeyOnHover ? dropdownRender : undefined}
+        menu={{
+          items: options,
+          defaultSelectedKeys: [defaultSelectedKey],
+          selectedKeys: [value?.key],
+          selectable: true,
+          onSelect,
+          Item: { onMouseEnter: () => console.log('koko') },
+          ...menuProps,
+        }}
+      >
+        <Button
+          width={'100%'}
+          height={'var(--spacing-26)'}
+          backgroundColor={'gray.200'}
+          borderColor={'gray.300'}
+          borderWidth={'1px'}
+          fontSize={'xs'}
+          fontWeight={'medium'}
+          color={'gray.900'}
+          display={'flex'}
+          justifyContent={'space-between'}
+          gap={1}
+          colorScheme={'gray'}
+          textOverflow={'ellipsis'}
+          overflow={'hidden'}
+          whiteSpace={'nowrap'}
+        >
+          {isCapitalizeButtonTitle ? _.capitalize(buttonTitle || '') : buttonTitle}
+          <IoIosArrowDown color={'var(--chakra-colors-gray-900)'} />
+        </Button>
+      </Dropdown>
+    </Label>
   )
 }
