@@ -1,9 +1,6 @@
 import { InputNumberProps as AntdInputNumberProps, Select, SelectProps } from 'antd'
-import { Box, Flex, Text } from '@chakra-ui/react'
 import { makeSelectOptions } from '@src/helpers'
-import { TextProps } from '@chakra-ui/layout/dist/text'
 import { useState } from 'react'
-import { BoxProps } from '@chakra-ui/layout/dist/box'
 import { LengthLiteral, LengthUnit } from '@src/models/css/enums'
 import {
   InputComponent,
@@ -11,11 +8,6 @@ import {
 } from '@src/components/InputNumber/InputNumber.styles'
 import { Label, LabelProps } from '@src/components/Label'
 
-const mapLabelPosition = {
-  left: 'row-reverse',
-  top: 'column-reverse',
-  down: 'column',
-}
 export interface InputNumberProps extends AntdInputNumberProps {
   labelProps?: LabelProps
   selectAfterProps?: SelectProps
@@ -94,7 +86,7 @@ export const InputNumber: React.FC<InputNumberProps> = ({
   return (
     <Label {...labelProps}>
       <Component
-        controls={isInputComponent ? true : false}
+        controls={isInputComponent}
         value={value}
         onChange={onChangeValue}
         addonAfter={selectAfter}
