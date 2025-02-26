@@ -111,6 +111,8 @@ export const Select: React.FC<Props> = ({
         <Button
           width={'100%'}
           height={'var(--spacing-26)'}
+          paddingStart={1.5}
+          paddingEnd={1.5}
           backgroundColor={'gray.200'}
           borderColor={'gray.300'}
           borderWidth={'1px'}
