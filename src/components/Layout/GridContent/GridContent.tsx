@@ -8,12 +8,13 @@ import { BsQuestion } from 'react-icons/bs'
 import { InputNumber } from '@src/components/InputNumber'
 import { RiSettings5Fill } from 'react-icons/ri'
 import { Css } from '@src/models/css'
+import React from 'react'
 
 interface IGridContentProps {
   model: Css.IGrid
 }
 
-export const GridContent = ({ model }: IGridContentProps) => {
+export const GridContent: React.FC<IGridContentProps> = () => {
   return (
     <>
       <ContentWrapper property={'Grid'}>

@@ -1,5 +1,5 @@
 import React, { ReactNode, useMemo } from 'react'
-import { Dropdown } from 'antd'
+import { Dropdown, MenuProps } from 'antd'
 import { IoIosArrowDown } from 'react-icons/io'
 import { Button, ButtonGroup, Center, Icon } from '@chakra-ui/react'
 import { Label, LabelProps } from '@src/components/Label'
@@ -49,7 +49,7 @@ export const Segmented = ({
   const [selectedKey, setSelectedKey] = React.useState<string | undefined>(
     defaultSelectedKey,
   )
-  const handleChange = (value: T) => {
+  const handleChange = (value: any) => {
     onChange?.(value)
   }
 
@@ -90,22 +90,24 @@ export const Segmented = ({
                 p="1"
                 pr="0"
                 onClick={() => {
-                  handleChange(item.key as T)
+                  handleChange(item.key)
                 }}
               >
                 <Center flexGrow="1">{item.label}</Center>
                 <Dropdown
                   trigger={['click']}
                   placement={'bottomRight'}
-                  menu={{
-                    items: menuItems,
-                    selectable: true,
-                    selectedKeys: [value],
-                    onSelect,
-                    onClick: ({ domEvent }) => {
-                      domEvent.stopPropagation()
-                    },
-                  }}
+                  menu={
+                    {
+                      items: menuItems,
+                      selectable: true,
+                      selectedKeys: [value],
+                      onSelect,
+                      onClick: ({ domEvent }) => {
+                        domEvent.stopPropagation()
+                      },
+                    } as MenuProps
+                  }
                 >
                   <Center
                     role="button"
