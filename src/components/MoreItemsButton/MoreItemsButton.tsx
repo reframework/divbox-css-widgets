@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react'
+import { useState } from 'react'
 import { Box, Button, ButtonProps } from '@chakra-ui/react'
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md'
 
