@@ -5,7 +5,7 @@ import { MouseEvent } from 'react'
 
 export interface ICssPropertyLabelProps {
   property: string
-  isActive: boolean
+  isActive?: boolean
   onReset?: (() => void) | null
   align?: TooltipProps['align']
   placement?: TooltipProps['placement']

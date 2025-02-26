@@ -4,48 +4,48 @@ import { IoIosArrowDown } from 'react-icons/io'
 import { Button, ButtonGroup, Center, Icon } from '@chakra-ui/react'
 import { Label, LabelProps } from '@src/components/Label'
 
-export type ISegmentedItem<T extends string = string> = {
+export type ISegmentedItem = {
   label: ReactNode
-  key: T
+  key: any
 }
 
-type SegmentedMenuDefaultItem<T extends string = string> = {
+type SegmentedMenuDefaultItem = {
   label: ReactNode
   buttonLabel: ReactNode
-  key: T
+  key: any
   icon?: ReactNode
 }
 
-type SegmentedMenuGroupItem<T extends string = string> = {
+type SegmentedMenuGroupItem = {
   type: 'group'
   label: ReactNode
   key: string
-  children: SegmentedMenuDefaultItem<T>[]
+  children: SegmentedMenuDefaultItem[]
   icon?: ReactNode
 }
 
-export type ISegmentedMenuItem<T extends string = string> =
-  | SegmentedMenuDefaultItem<T>
+export type ISegmentedMenuItem =
+  | SegmentedMenuDefaultItem
   | { type: 'divider' }
-  | SegmentedMenuGroupItem<T>
+  | SegmentedMenuGroupItem
 
-interface Props<T extends string> {
-  value: T
-  options: ISegmentedItem<T>[]
-  onChange?: (value: T | null) => void
-  menuItems?: ISegmentedMenuItem<T>[]
+interface Props {
+  value: any
+  options: ISegmentedItem[]
+  onChange?: (value: any) => void
+  menuItems?: ISegmentedMenuItem[]
   defaultSelectedKey?: string
   labelProps?: LabelProps
 }
 
-export const Segmented = <T extends string>({
+export const Segmented = ({
   options,
   onChange,
   value,
   menuItems,
   defaultSelectedKey,
   labelProps,
-}: Props<T>) => {
+}: Props) => {
   const [selectedKey, setSelectedKey] = React.useState<string | undefined>(
     defaultSelectedKey,
   )
@@ -130,7 +130,7 @@ export const Segmented = <T extends string>({
               key={item.key}
               {...buttonProps(value === item.key)}
               onClick={() => {
-                handleChange(item.key as T)
+                handleChange(item.key)
               }}
             >
               {item.label}

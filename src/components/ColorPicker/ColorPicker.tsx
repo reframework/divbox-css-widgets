@@ -7,7 +7,7 @@ import React from 'react'
 import { ColorPickerProps } from 'react-best-gradient-color-picker/src/shared/types'
 import { WIDGET_WIDTH } from '@src/constants/styles'
 import styled from '@emotion/styled'
-interface Props extends ColorPickerProps {
+interface Props {
   gradientColorPickerProps?: ColorPickerProps
   antColorPickerProps?: AntColorPickerProps
 }

@@ -18,7 +18,7 @@ interface Props {
   optionLabelProp?: string
   activeItemKeyOnHover?: string
   activeItemPropertyOnHover?: string
-  setActiveItemOnHover?: (key?: React.Key) => void
+  setActiveItemOnHover?: (key?: string) => void
   labelProps?: LabelProps
   isCapitalizeButtonTitle?: boolean
 }
