@@ -84,6 +84,7 @@ export const Segmented = <T extends string>({
             return (
               <Button
                 {...buttonProps(value === item.key)}
+                key={item.key}
                 minW="50px"
                 justifyContent="space-between"
                 p="1"
@@ -126,6 +127,7 @@ export const Segmented = <T extends string>({
 
           return (
             <Button
+              key={item.key}
               {...buttonProps(value === item.key)}
               onClick={() => {
                 handleChange(item.key as T)

@@ -19,176 +19,120 @@ import {
 import { MoreItemsButton } from '@src/components/MoreItemsButton'
 import { useCallback, useState } from 'react'
 import { ColorPicker } from '@src/components/ColorPicker'
-import { IFontSize, ILineHeight } from '@src/models/css/typography'
 import {
-  FontFamily,
-  FontWeight,
-  TextAlign,
-  TextDecoration,
-  TextFontStyle,
-} from '@src/models/css/enums'
-import { MainItemType } from '@src/types/props'
+  mapPropertyTitle,
+  TypographyProperties,
+  TypographyValues,
+} from '@src/components/Typography/Typography.helpers'
+import { useSetColorPikerState } from '@src/hooks/handlePikerColor'
 
 export const Typography = () => {
   const { value, onChange } = useProps()
-  const [color, setColor] = useState('rgba(255,255,255,1)')
-  const onChangeFontValue = useCallback(
-    (next: MainItemType) => {
-      onChange({
-        ...value,
-        text: {
-          ...value.text,
-          f: next.key as FontFamily,
-        },
-      })
-    },
-    [value],
-  )
-  const onChangeWeightValue = useCallback(
-    (next: MainItemType) => {
-      onChange({
-        ...value,
-        text: {
-          ...value.text,
-          w: next.key as FontWeight,
-        },
-      })
-    },
-    [value],
-  )
-  const onChangeSizeValue = useCallback(
-    (next: IFontSize) => {
-      onChange({
-        ...value,
-        text: {
-          ...value.text,
-          s: next,
-        },
-      })
-    },
-    [value],
-  )
 
-  const onChangeHeightValue = useCallback(
-    (next: ILineHeight | null) => {
-      onChange({
-        ...value,
-        text: {
-          ...value.text,
-          lh: next,
-        },
-      })
-    },
-    [value],
-  )
-  const onChangeAlignValue = useCallback(
-    (next: TextAlign | null) => {
-      onChange({
-        ...value,
-        text: {
-          ...value.text,
-          a: next,
-        },
-      })
-    },
-    [value],
-  )
+  const onChangeValue = useCallback(
+    (property: any) => (next: any) => {
+      const isSelectValue = [
+        TypographyValues[TypographyProperties.FONT_FAMILY],
+        TypographyValues[TypographyProperties.FONT_WEIGHT],
+        TypographyValues[TypographyProperties.WORD_WRAP],
+        TypographyValues[TypographyProperties.WHITE_SPACE],
+        TypographyValues[TypographyProperties.WORD_BREAK],
+      ].includes(property)
+      const propertyValue = isSelectValue ? next.key : next
 
-  const onChangeFontStyleValue = useCallback(
-    (next: TextFontStyle | null) => {
       onChange({
         ...value,
         text: {
           ...value.text,
-          fs: next,
+          [property]: propertyValue,
         },
       })
     },
-    [value],
+    [value, TypographyValues],
   )
-  const onChangeDecorationValue = useCallback(
-    (next: TextDecoration | null) => {
-      onChange({
-        ...value,
-        text: {
-          ...value.text,
-          dec: next,
-        },
-      })
-    },
-    [value],
-  )
-
+  const { color, setColor } = useSetColorPikerState({
+    initState: value.text.c,
+    changeColor: onChangeValue(TypographyValues[TypographyProperties.COLOR]),
+  })
   const [wrapActiveItemOnHover, setWrapActiveItemOnHover] = useState<
     string | undefined
   >()
+
   const [wordBreakActiveItemOnHover, setWordBreakActiveItemOnHover] = useState<
     string | undefined
   >()
+
   const [whiteSpaceActiveItemOnHover, setWhiteSpaceActiveItemOnHover] = useState<
     string | undefined
   >()
 
-  console.log(color)
   return (
     <>
-      <ContentWrapper title={'Font'}>
+      <ContentWrapper property={mapPropertyTitle[TypographyProperties.FONT_FAMILY]}>
         <Select
           options={FONT_FAMILY_OPTIONS}
           defaultSelectedKey={value.text.f}
-          handleSelect={onChangeFontValue}
+          handleSelect={onChangeValue(
+            TypographyValues[TypographyProperties.FONT_FAMILY],
+          )}
           optionLabelProp={'labelInValue'}
         />
       </ContentWrapper>
-      <ContentWrapper title={'Weight'}>
+      <ContentWrapper property={mapPropertyTitle[TypographyProperties.FONT_WEIGHT]}>
         <Select
           options={FONT_WEIGHT_OPTIONS}
           defaultSelectedKey={value.text.w}
-          handleSelect={onChangeWeightValue}
+          handleSelect={onChangeValue(
+            TypographyValues[TypographyProperties.FONT_WEIGHT],
+          )}
           isCapitalizeButtonTitle={false}
         />
       </ContentWrapper>
       <Grid templateColumns={'1fr 1fr'} gap={1} mb="2">
         <CssUnit.InputWithLabel
-          onChange={onChangeSizeValue}
+          onChange={onChangeValue(TypographyValues[TypographyProperties.FONT_SIZE])}
           value={value.text.s}
-          label={'Size'}
+          label={mapPropertyTitle[TypographyProperties.FONT_SIZE]}
           labelPosition={'left'}
           labelWrapperStyles={{ width: LABEL_WIDTH }}
         />
         <CssUnit.InputWithLabel
-          onChange={onChangeHeightValue}
+          onChange={onChangeValue(
+            TypographyValues[TypographyProperties.LINE_HEIGHT],
+          )}
           value={value.text.lh}
-          label={'Height'}
+          label={mapPropertyTitle[TypographyProperties.LINE_HEIGHT]}
           labelPosition={'left'}
           labelWrapperStyles={{ width: LABEL_WIDTH }}
         />
       </Grid>
-      <ContentWrapper title={'Color'}>
+      <ContentWrapper property={mapPropertyTitle[TypographyProperties.COLOR]}>
         <ColorPicker
           gradientColorPickerProps={{
-            onChange: setColor,
             value: color,
+            onChange: setColor,
           }}
         />
       </ContentWrapper>
-      <ContentWrapper title={'Align'}>
+      <ContentWrapper property={mapPropertyTitle[TypographyProperties.TEXT_ALIGN]}>
         <Segmented
           defaultSelectedKey={ALIGN_OPTIONS[0].key}
           options={ALIGN_OPTIONS}
           value={value.text.a}
-          onChange={onChangeAlignValue}
+          onChange={onChangeValue(TypographyValues[TypographyProperties.TEXT_ALIGN])}
         />
       </ContentWrapper>
-      <ContentWrapper title={'Style'}>
+      <ContentWrapper property={'Style'}>
         <Grid templateColumns={'1fr 2fr'} gap={1}>
           <Box display={'flex'} flexDirection={'column'} gap={1}>
             <Segmented
               defaultSelectedKey={STYLE_ITALIC_OPTIONS[0].key}
               options={STYLE_ITALIC_OPTIONS}
               value={value.text.fs}
-              onChange={onChangeFontStyleValue}
-              label={'Italic'}
+              onChange={onChangeValue(
+                TypographyValues[TypographyProperties.FONT_STYLE],
+              )}
+              label={mapPropertyTitle[TypographyProperties.FONT_STYLE]}
               labelPosition={'down'}
             />
           </Box>
@@ -196,66 +140,88 @@ export const Typography = () => {
             defaultSelectedKey={STYLE_DECORATION_OPTIONS[0].key}
             options={STYLE_DECORATION_OPTIONS}
             value={value.text.dec}
-            onChange={onChangeDecorationValue}
-            label={'Decoration'}
+            onChange={onChangeValue(
+              TypographyValues[TypographyProperties.TEXT_DECORATION],
+            )}
+            label={mapPropertyTitle[TypographyProperties.TEXT_DECORATION]}
             labelPosition={'down'}
           />
         </Grid>
       </ContentWrapper>
       <MoreItemsButton buttonTitle={'More type options'}>
-        <ContentWrapper title={'Spacing'} containerProps={{ mt: 2 }}>
+        <ContentWrapper property={'Spacing'} containerProps={{ mt: 2 }}>
           <Grid templateColumns={'1fr 1fr'} gap={2} alignContent={'center'}>
             <CssUnit.InputWithLabel
-              onChange={onChangeSizeValue}
-              value={value.text.whs}
-              label={'Letter'}
+              onChange={onChangeValue(
+                TypographyValues[TypographyProperties.LETTER_SPACING],
+              )}
+              value={value.text.ls}
+              label={mapPropertyTitle[TypographyProperties.LETTER_SPACING]}
               labelPosition={'down'}
             />
             <CssUnit.InputWithLabel
-              onChange={onChangeHeightValue}
-              value={value.text.wbr}
-              label={'Word'}
+              onChange={onChangeValue(
+                TypographyValues[TypographyProperties.WORD_SPACING],
+              )}
+              value={value.text.ws}
+              label={mapPropertyTitle[TypographyProperties.WORD_SPACING]}
               labelPosition={'down'}
             />
           </Grid>
         </ContentWrapper>
-        <ContentWrapper title={'Transform'}>
+        <ContentWrapper
+          property={mapPropertyTitle[TypographyProperties.TEXT_TRANSFORM]}
+        >
           <Segmented
             defaultSelectedKey={TRANSFORM_OPTIONS[0].key}
             options={TRANSFORM_OPTIONS}
-            value={value.text.a}
-            onChange={onChangeAlignValue}
+            value={value.text.ttr}
+            onChange={onChangeValue(
+              TypographyValues[TypographyProperties.TEXT_TRANSFORM],
+            )}
           />
         </ContentWrapper>
-        <ContentWrapper title={'Wrap'}>
+        <ContentWrapper property={mapPropertyTitle[TypographyProperties.WORD_WRAP]}>
           <Select
-            options={WRAP_OPTIONS({
-              setActiveItemOnHover: setWrapActiveItemOnHover,
-            })}
+            options={WRAP_OPTIONS(setWrapActiveItemOnHover)}
             activeItemKeyOnHover={wrapActiveItemOnHover}
             activeItemPropertyOnHover={'description'}
             setActiveItemOnHover={setWrapActiveItemOnHover}
+            defaultSelectedKey={value.text.wwr}
+            handleSelect={onChangeValue(
+              TypographyValues[TypographyProperties.WORD_WRAP],
+            )}
           />
         </ContentWrapper>
-        <ContentWrapper title={'Breaking'}>
+        <ContentWrapper property={'Breaking'}>
           <Grid templateColumns={'1fr 1fr'} gap={1}>
             <Select
-              options={WORD_BREAK_OPTIONS({
-                setActiveItemOnHover: setWordBreakActiveItemOnHover,
-              })}
+              options={WORD_BREAK_OPTIONS(setWordBreakActiveItemOnHover)}
               activeItemKeyOnHover={wordBreakActiveItemOnHover}
               activeItemPropertyOnHover={'description'}
               setActiveItemOnHover={setWordBreakActiveItemOnHover}
-              labelProps={{ labelPosition: 'down', label: 'Words' }}
+              labelProps={{
+                labelPosition: 'down',
+                label: mapPropertyTitle[TypographyProperties.WORD_BREAK],
+              }}
+              defaultSelectedKey={value.text.wbr}
+              handleSelect={onChangeValue(
+                TypographyValues[TypographyProperties.WORD_BREAK],
+              )}
             />
             <Select
-              options={WHITE_SPACE_OPTIONS({
-                setActiveItemOnHover: setWhiteSpaceActiveItemOnHover,
-              })}
+              options={WHITE_SPACE_OPTIONS(setWhiteSpaceActiveItemOnHover)}
               activeItemKeyOnHover={whiteSpaceActiveItemOnHover}
               activeItemPropertyOnHover={'description'}
               setActiveItemOnHover={setWhiteSpaceActiveItemOnHover}
-              labelProps={{ labelPosition: 'down', label: 'Lines' }}
+              labelProps={{
+                labelPosition: 'down',
+                label: mapPropertyTitle[TypographyProperties.WHITE_SPACE],
+              }}
+              defaultSelectedKey={value.text.whs}
+              handleSelect={onChangeValue(
+                TypographyValues[TypographyProperties.WHITE_SPACE],
+              )}
             />
           </Grid>
         </ContentWrapper>

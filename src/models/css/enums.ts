@@ -158,6 +158,12 @@ export enum Wrap {
 export enum LetterSpacingLiteral {
   NORMAL = 'normal',
 }
+export enum WordSpacingLiteral {
+  NORMAL = 'normal',
+}
+export enum LineHeightLiteral {
+  NORMAL = 'normal',
+}
 
 export enum Overflow {
   VISIBLE = 'visible',

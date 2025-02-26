@@ -175,11 +175,7 @@ export const TRANSFORM_OPTIONS = [
     label: <TbLetterCaseLower size={'14px'} />,
   },
 ]
-export const WRAP_OPTIONS = ({
-  setActiveItemOnHover,
-}: {
-  setActiveItemOnHover?: (key: string) => void
-}) => [
+export const WRAP_OPTIONS = (setActiveItemOnHover?: (key: string) => void) => [
   {
     key: Wrap.NORMAL,
     label: _.capitalize(Wrap.NORMAL),
@@ -199,11 +195,7 @@ export const WRAP_OPTIONS = ({
     description: 'example2',
   },
 ]
-export const WORD_BREAK_OPTIONS = ({
-  setActiveItemOnHover,
-}: {
-  setActiveItemOnHover?: (key: string) => void
-}) => [
+export const WORD_BREAK_OPTIONS = (setActiveItemOnHover?: (key: string) => void) => [
   {
     key: WordBreak.NORMAL,
     label: _.capitalize(WordBreak.NORMAL),
@@ -229,16 +221,13 @@ export const WORD_BREAK_OPTIONS = ({
     description: 'example4',
   },
 ]
-export const WHITE_SPACE_OPTIONS = ({
-  setActiveItemOnHover,
-}: {
-  setActiveItemOnHover?: (key: string) => void
-}) => [
+export const WHITE_SPACE_OPTIONS = (
+  setActiveItemOnHover?: (key: string) => void,
+) => [
   {
     key: WhiteSpace.NORMAL,
     label: _.capitalize(WhiteSpace.NORMAL),
     onMouseEnter: () => setActiveItemOnHover?.(WhiteSpace.NORMAL),
-    onMouseLeave: () => setActiveItemOnHover?.(WhiteSpace.NORMAL),
     description: 'example1',
   },
   {

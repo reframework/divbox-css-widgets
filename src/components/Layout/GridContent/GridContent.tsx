@@ -16,7 +16,7 @@ interface IGridContentProps {
 export const GridContent = ({ model }: IGridContentProps) => {
   return (
     <>
-      <ContentWrapper title={'Grid'}>
+      <ContentWrapper property={'Grid'}>
         <Grid templateColumns={'1fr 1fr 24px'} gap={'5px'}>
           <InputNumber min={0} defaultValue={0} controls label={'Columns'} />
           <InputNumber min={0} defaultValue={0} controls label={'Rows'} />
@@ -26,7 +26,7 @@ export const GridContent = ({ model }: IGridContentProps) => {
           />
         </Grid>
       </ContentWrapper>
-      <ContentWrapper title={'Direction'}>
+      <ContentWrapper property={'Direction'}>
         <Grid templateColumns={'1fr 24px'} gap={'5px'}>
           <Segmented
             value={GRID_DIRECTION_MAIN_OPTIONS[0].key}
@@ -39,7 +39,7 @@ export const GridContent = ({ model }: IGridContentProps) => {
           />
         </Grid>
       </ContentWrapper>
-      <ContentWrapper title={'Gap'}>
+      <ContentWrapper property={'Gap'}>
         <Slider />
       </ContentWrapper>
     </>

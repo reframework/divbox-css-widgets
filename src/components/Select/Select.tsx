@@ -43,6 +43,7 @@ export const Select: React.FC<Props> = ({
 }) => {
   const [value, setValue] = useState<MainItemType | undefined>()
 
+  const keyRef = React.useRef<string | undefined>()
   const contentStyle: React.CSSProperties = {
     backgroundColor: 'var(--chakra-colors-white)',
     borderRadius: 'var(--chakra-radii-sm)',
@@ -60,35 +61,30 @@ export const Select: React.FC<Props> = ({
     setActiveItemOnHover?.(defaultValue.key)
   }, [])
 
-  useEffect(() => {
-    return () => {
-      setActiveItemOnHover?.(value?.key)
-    }
-  }, [value])
   const onSelect = ({ key }: any) => {
+    keyRef.current = key
     setValue(key)
     const item = findSelectItem({ key, options })
     setValue(item)
-    setActiveItemOnHover?.(key)
     handleSelect?.(item)
   }
 
   const menuStyle: React.CSSProperties = {
     boxShadow: 'none',
   }
-
   const dropdownRender = (menu) => {
     return (
       <div
         style={contentStyle}
-        onMouseLeave={() => setActiveItemOnHover?.(value?.key)}
+        onMouseLeave={() => setActiveItemOnHover?.(keyRef.current)}
       >
         {React.cloneElement(menu, { style: menuStyle })} <Divider />
         <SelectDropdownBox>
-          {activeItemKeyOnHover &&
+          {
             options?.find((el) => el.key === activeItemKeyOnHover)?.[
               activeItemPropertyOnHover
-            ]}
+            ]
+          }
         </SelectDropdownBox>
       </div>
     )
@@ -106,7 +102,6 @@ export const Select: React.FC<Props> = ({
           selectedKeys: [value?.key],
           selectable: true,
           onSelect,
-          Item: { onMouseEnter: () => console.log('koko') },
           ...menuProps,
         }}
       >

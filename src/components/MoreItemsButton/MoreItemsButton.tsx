@@ -40,7 +40,7 @@ export const MoreItemsButton: React.FC<Props> = ({
           <MdKeyboardArrowDown fontSize={'lg'} />
         )}
       </Button>
-      {expanded && children}
+      <Box mt={2}>{expanded && children}</Box>
     </Box>
   )
 }
