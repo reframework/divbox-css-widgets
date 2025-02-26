@@ -1,5 +1,5 @@
 import { Dropdown as AntdDropdown, MenuProps } from 'antd'
-import { Button, Divider, Placement } from '@chakra-ui/react'
+import { Button, Divider, Placement, Text } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { findSelectItem } from '@src/helpers'
 import { IoIosArrowDown } from 'react-icons/io'
@@ -114,18 +114,21 @@ export const Select: React.FC<Props> = ({
           backgroundColor={'gray.200'}
           borderColor={'gray.300'}
           borderWidth={'1px'}
-          fontSize={'xs'}
-          fontWeight={'medium'}
-          color={'gray.900'}
           display={'flex'}
           justifyContent={'space-between'}
           gap={1}
           colorScheme={'gray'}
-          textOverflow={'ellipsis'}
-          overflow={'hidden'}
-          whiteSpace={'nowrap'}
+          fontSize={'xs'}
         >
-          {isCapitalizeButtonTitle ? _.capitalize(buttonTitle || '') : buttonTitle}
+          <Text
+            color={'gray.900'}
+            fontWeight={'medium'}
+            textOverflow={'ellipsis'}
+            overflow={'hidden'}
+            whiteSpace={'nowrap'}
+          >
+            {isCapitalizeButtonTitle ? _.capitalize(buttonTitle || '') : buttonTitle}
+          </Text>
           <IoIosArrowDown color={'var(--chakra-colors-gray-900)'} />
         </Button>
       </Dropdown>

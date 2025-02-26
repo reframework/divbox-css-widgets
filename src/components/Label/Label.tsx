@@ -3,11 +3,11 @@ import { Box, Flex, Text } from '@chakra-ui/react'
 import React from 'react'
 import { TextProps } from '@chakra-ui/layout/dist/text'
 import { BoxProps } from '@chakra-ui/layout/dist/box'
-
+export type LabelPositionType = 'left' | 'top' | 'down'
 export interface LabelProps {
   isActive?: boolean
   label?: string
-  labelPosition?: 'left' | 'top' | 'down'
+  labelPosition?: LabelPositionType
   labelStyles?: TextProps
   labelWrapperStyles?: BoxProps
 }

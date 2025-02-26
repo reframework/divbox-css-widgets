@@ -124,7 +124,6 @@ export const CssUnitInput: React.FC<ICssUnitInputProps> = ({
       onClose?.()
     }
   }
-
   const selectAfter = (
     <Select
       {...unitSelectProps}

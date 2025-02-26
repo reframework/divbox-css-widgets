@@ -15,12 +15,8 @@ export interface InputNumberProps extends AntdInputNumberProps {
   handleSelectUnit?: (value: string | number) => void
 }
 export const InputNumber: React.FC<InputNumberProps> = ({
-  label,
-  labelPosition = 'down',
   defaultValue,
   onChange,
-  labelStyles,
-  labelWrapperStyles,
   selectAfterProps,
   cssUnitsTypes,
   handleSelectUnit,
@@ -73,7 +69,6 @@ export const InputNumber: React.FC<InputNumberProps> = ({
       defaultValue={LengthUnit.PX}
       value={unit}
       onSelect={onSelectUnit}
-      optionLabelProp={'labelForInput'}
       options={[...selectOptions, ...additionalSelectOptions]}
       suffixIcon={null}
       popupMatchSelectWidth

@@ -1,12 +1,16 @@
 import { Grid } from '@chakra-ui/react'
 import { InputNumber, InputNumberProps } from '@src/components/InputNumber'
 import { LABEL_WIDTH } from '@src/constants/styles'
+import { LabelPositionType } from '@src/components/Label'
 
-const Input: React.FC<InputNumberProps> = (props) => (
+const Input: React.FC<InputNumberProps> = ({ labelProps, ...props }) => (
   <InputNumber
     min={0}
-    labelPosition={'left'}
-    labelWrapperStyles={{ width: LABEL_WIDTH }}
+    labelProps={{
+      labelPosition: 'left' as LabelPositionType,
+      labelWrapperStyles: { width: LABEL_WIDTH },
+      ...labelProps,
+    }}
     {...props}
   />
 )
@@ -15,12 +19,12 @@ export const Size = () => {
   return (
     <>
       <Grid templateColumns={'1fr 1fr'} gap={'5px'}>
-        <Input label={'Width'} />
-        <Input label={'Height'} />
-        <Input label={'Min W'} />
-        <Input label={'Min H'} />
-        <Input label={'Max W'} />
-        <Input label={'Max H'} />
+        <Input labelProps={{ label: 'Width' }} />
+        <Input labelProps={{ label: 'Height' }} />
+        <Input labelProps={{ label: 'Min W' }} />
+        <Input labelProps={{ label: 'Min H' }} />
+        <Input labelProps={{ label: 'Max W' }} />
+        <Input labelProps={{ label: 'Max H' }} />
       </Grid>
     </>
   )

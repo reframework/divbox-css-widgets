@@ -1,6 +1,6 @@
 import { ContentWrapper } from '@src/components/ContentWrapper'
 import { Select } from '@src/components/Select'
-import { Box, Grid } from '@chakra-ui/react'
+import { Box, Grid, GridItem } from '@chakra-ui/react'
 import { CssUnit } from '@src/components/CssUnitInput'
 import { useProps } from '@src/components/Context'
 import { LABEL_WIDTH } from '@src/constants/styles'
@@ -194,35 +194,39 @@ export const Typography = () => {
           />
         </ContentWrapper>
         <ContentWrapper property={'Breaking'}>
-          <Grid templateColumns={'1fr 1fr'} gap={1}>
-            <Select
-              options={WORD_BREAK_OPTIONS(setWordBreakActiveItemOnHover)}
-              activeItemKeyOnHover={wordBreakActiveItemOnHover}
-              activeItemPropertyOnHover={'description'}
-              setActiveItemOnHover={setWordBreakActiveItemOnHover}
-              labelProps={{
-                labelPosition: 'down',
-                label: mapPropertyTitle[TypographyProperties.WORD_BREAK],
-              }}
-              defaultSelectedKey={value.text.wbr}
-              handleSelect={onChangeValue(
-                TypographyValues[TypographyProperties.WORD_BREAK],
-              )}
-            />
-            <Select
-              options={WHITE_SPACE_OPTIONS(setWhiteSpaceActiveItemOnHover)}
-              activeItemKeyOnHover={whiteSpaceActiveItemOnHover}
-              activeItemPropertyOnHover={'description'}
-              setActiveItemOnHover={setWhiteSpaceActiveItemOnHover}
-              labelProps={{
-                labelPosition: 'down',
-                label: mapPropertyTitle[TypographyProperties.WHITE_SPACE],
-              }}
-              defaultSelectedKey={value.text.whs}
-              handleSelect={onChangeValue(
-                TypographyValues[TypographyProperties.WHITE_SPACE],
-              )}
-            />
+          <Grid templateColumns={'49% 49%'} gap={1} overflow={'hidden'}>
+            <GridItem>
+              <Select
+                options={WORD_BREAK_OPTIONS(setWordBreakActiveItemOnHover)}
+                activeItemKeyOnHover={wordBreakActiveItemOnHover}
+                activeItemPropertyOnHover={'description'}
+                setActiveItemOnHover={setWordBreakActiveItemOnHover}
+                labelProps={{
+                  labelPosition: 'down',
+                  label: mapPropertyTitle[TypographyProperties.WORD_BREAK],
+                }}
+                defaultSelectedKey={value.text.wbr}
+                handleSelect={onChangeValue(
+                  TypographyValues[TypographyProperties.WORD_BREAK],
+                )}
+              />
+            </GridItem>
+            <GridItem>
+              <Select
+                options={WHITE_SPACE_OPTIONS(setWhiteSpaceActiveItemOnHover)}
+                activeItemKeyOnHover={whiteSpaceActiveItemOnHover}
+                activeItemPropertyOnHover={'description'}
+                setActiveItemOnHover={setWhiteSpaceActiveItemOnHover}
+                labelProps={{
+                  labelPosition: 'down',
+                  label: mapPropertyTitle[TypographyProperties.WHITE_SPACE],
+                }}
+                defaultSelectedKey={value.text.whs}
+                handleSelect={onChangeValue(
+                  TypographyValues[TypographyProperties.WHITE_SPACE],
+                )}
+              />
+            </GridItem>
           </Grid>
         </ContentWrapper>
       </MoreItemsButton>
