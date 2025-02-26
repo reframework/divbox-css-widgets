@@ -51,12 +51,14 @@ export const Select: React.FC<Props> = ({
   }
   useEffect(() => {
     if (defaultSelectedKey) {
+      keyRef.current = defaultSelectedKey
       setValue(findSelectItem({ key: defaultSelectedKey, options }))
       setActiveItemOnHover?.(defaultSelectedKey)
       return
     }
 
     const defaultValue = (options as any)?.[0]?.children?.[0] || options?.[0]
+    keyRef.current = defaultValue.key
     setValue(defaultValue)
     setActiveItemOnHover?.(defaultValue.key)
   }, [])
@@ -67,6 +69,7 @@ export const Select: React.FC<Props> = ({
     const item = findSelectItem({ key, options })
     setValue(item)
     handleSelect?.(item)
+    setActiveItemOnHover?.(key)
   }
 
   const menuStyle: React.CSSProperties = {
