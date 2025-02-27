@@ -7,6 +7,7 @@ import { Widget } from '@src/components/Widget'
 import { ctx } from '@src/components/Context'
 import { ICssWidgetProps } from '@src/types/props'
 import { fonts } from '@src/components/theme/fonts'
+import { spacing } from '@src/components/theme/spacing'
 
 export const App = (props: ICssWidgetProps) => {
   return (
@@ -19,19 +20,21 @@ export const App = (props: ICssWidgetProps) => {
         components: {
           Menu: {
             // @ts-expect-error type
-            itemBorderRadius: 'var(--radius-base)',
+            itemBorderRadius: 'var(--chakra-radii-sm)',
           },
           Dropdown: {
             colorPrimary: 'var(--chakra-colors-gray-900)',
             controlItemBgActive: 'var(--color-gray-2)',
             fontSize: 'var(--chakra-fontSizes-xs)',
-            lineHeight: '2',
-            paddingBlock: 5,
+            paddingBlock: 'var(--chakra-space-1)',
             controlItemBgHover: 'var(--chakra-colors-gray-100)',
             controlItemBgActiveHover: 'var(--chakra-colors-gray-100)',
+            borderRadiusLG: 'var(--chakra-radii-sm)',
+            paddingXXS: 'var(--chakra-space-1) 0',
+            borderRadiusSM: 0,
           },
           Radio: {
-            buttonSolidCheckedHoverBg: 'var(--chakra-colors-gray-100)',
+            buttonSolidCheckedHoverBg: 'var(--chakra-colors-gray-300)',
             buttonSolidCheckedBg: 'var(--chakra-colors-gray-200)',
             buttonSolidCheckedColor: 'var(--chakra-colors-gray-900)',
             buttonColor: 'var(--chakra-colors-gray-900)',
@@ -93,6 +96,7 @@ export const GlobalStyles = () => {
       styles={[
         colors,
         fonts,
+        spacing,
         css`
           :root {
             --divbox-highlight-bg-blue-50: rgba(235, 248, 255, 0.8);

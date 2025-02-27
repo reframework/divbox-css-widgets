@@ -32,7 +32,7 @@ export const RgbColorModel = (
     r: props?.r || 0,
     g: props?.g || 0,
     b: props?.b || 0,
-    a: props?.a || null,
+    a: props?.a || 1,
   }
 }
 

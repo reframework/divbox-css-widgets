@@ -10,7 +10,7 @@ export const IconButton: React.FC<Props> = ({ ariaLabel, ...props }) => {
     <ChakraIconButton
       backgroundColor={'gray.200'}
       height={7}
-      minWidth={'24px'}
+      minWidth={6}
       aria-label={ariaLabel}
       {...props}
     />

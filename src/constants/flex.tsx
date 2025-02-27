@@ -1,10 +1,10 @@
 import { IoIosArrowRoundDown, IoIosArrowRoundForward } from 'react-icons/io'
 import { HiMiniBarsArrowDown, HiMiniBarsArrowUp } from 'react-icons/hi2'
 import { Box } from '@chakra-ui/react'
-import { toMakeUpperFirstChar } from '@src/helpers'
 import { Css } from '@src/models/css'
 import { ReactNode } from 'react'
 import { ISegmentedMenuItem } from '@src/components/Segmented'
+import _ from 'lodash'
 
 export const FLEX_DIRECTION_MAIN_OPTIONS = [
   {
@@ -20,43 +20,43 @@ export const FLEX_DIRECTION_MAIN_OPTIONS = [
 export const DISPLAY_MAIN_OPTIONS = [
   {
     key: Css.Enum.Display.BLOCK,
-    label: toMakeUpperFirstChar(Css.Enum.Display.BLOCK),
+    label: _.capitalize(Css.Enum.Display.BLOCK),
   },
   {
     key: Css.Enum.Display.FLEX,
-    label: toMakeUpperFirstChar(Css.Enum.Display.FLEX),
+    label: _.capitalize(Css.Enum.Display.FLEX),
   },
   {
     key: Css.Enum.Display.GRID,
-    label: toMakeUpperFirstChar(Css.Enum.Display.GRID),
+    label: _.capitalize(Css.Enum.Display.GRID),
   },
 ]
 
 export const DISPLAY_ADD_OPTIONS: ISegmentedMenuItem<Css.Enum.Display>[] = [
   {
     key: Css.Enum.Display.INLINE_BLOCK,
-    label: toMakeUpperFirstChar(Css.Enum.Display.INLINE_BLOCK),
+    label: _.capitalize(Css.Enum.Display.INLINE_BLOCK),
     buttonLabel: 'In-blk',
   },
   {
     key: Css.Enum.Display.INLINE_FLEX,
-    label: toMakeUpperFirstChar(Css.Enum.Display.INLINE_FLEX),
+    label: _.capitalize(Css.Enum.Display.INLINE_FLEX),
     buttonLabel: 'In-flx',
   },
   {
     key: Css.Enum.Display.INLINE_GRID,
-    label: toMakeUpperFirstChar(Css.Enum.Display.INLINE_GRID),
+    label: _.capitalize(Css.Enum.Display.INLINE_GRID),
     buttonLabel: 'In-grd',
   },
   {
     key: Css.Enum.Display.INLINE,
-    label: toMakeUpperFirstChar(Css.Enum.Display.INLINE),
+    label: _.capitalize(Css.Enum.Display.INLINE),
     buttonLabel: 'Inline',
   },
   { type: 'divider' },
   {
     key: Css.Enum.Display.NONE,
-    label: toMakeUpperFirstChar(Css.Enum.Display.NONE),
+    label: _.capitalize(Css.Enum.Display.NONE),
     buttonLabel: 'None',
   },
 ]

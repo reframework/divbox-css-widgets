@@ -8,15 +8,16 @@ import { BsQuestion } from 'react-icons/bs'
 import { InputNumber } from '@src/components/InputNumber'
 import { RiSettings5Fill } from 'react-icons/ri'
 import { Css } from '@src/models/css'
+import React from 'react'
 
 interface IGridContentProps {
   model: Css.IGrid
 }
 
-export const GridContent = ({ model }: IGridContentProps) => {
+export const GridContent: React.FC<IGridContentProps> = () => {
   return (
     <>
-      <ContentWrapper title={'Grid'}>
+      <ContentWrapper property={'Grid'}>
         <Grid templateColumns={'1fr 1fr 24px'} gap={'5px'}>
           <InputNumber min={0} defaultValue={0} controls label={'Columns'} />
           <InputNumber min={0} defaultValue={0} controls label={'Rows'} />
@@ -26,7 +27,7 @@ export const GridContent = ({ model }: IGridContentProps) => {
           />
         </Grid>
       </ContentWrapper>
-      <ContentWrapper title={'Direction'}>
+      <ContentWrapper property={'Direction'}>
         <Grid templateColumns={'1fr 24px'} gap={'5px'}>
           <Segmented
             value={GRID_DIRECTION_MAIN_OPTIONS[0].key}
@@ -39,7 +40,7 @@ export const GridContent = ({ model }: IGridContentProps) => {
           />
         </Grid>
       </ContentWrapper>
-      <ContentWrapper title={'Gap'}>
+      <ContentWrapper property={'Gap'}>
         <Slider />
       </ContentWrapper>
     </>

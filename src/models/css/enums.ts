@@ -124,6 +124,10 @@ export enum TextAlign {
   JUSTIFY = 'justify',
 }
 
+export enum TextFontStyle {
+  ITALIC = 'italic',
+  NORMAL = 'normal',
+}
 export enum TextDecoration {
   NONE = 'none',
   UNDERLINE = 'underline',
@@ -145,8 +149,19 @@ export enum WordBreak {
   KEEP_ALL = 'keep-all',
   BREAK_ALL = 'break-all',
 }
+export enum Wrap {
+  NORMAL = 'normal',
+  BREAK_WORD = 'break-word',
+  ANYWHERE = 'anywhere',
+}
 
 export enum LetterSpacingLiteral {
+  NORMAL = 'normal',
+}
+export enum WordSpacingLiteral {
+  NORMAL = 'normal',
+}
+export enum LineHeightLiteral {
   NORMAL = 'normal',
 }
 
